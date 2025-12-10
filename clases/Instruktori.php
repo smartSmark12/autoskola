@@ -11,13 +11,6 @@ class Instruktori(){
 
     function nastavHodnoty($id, $jmeno, $prijmeni, $telefon, $email, $aktivni){
 
-        $this->id = $id;
-        $this->jmeno = $jmeno;
-        $this->prijmeni = $prijmeni;
-        $this->telefon = $telefon;
-        $this->email = $email;
-        $this->aktivni = $aktivni;
-
         // Id validation
         if (!filter_var($id, FILTER_VALIDATE_INT) === false) {
             $this->id = $id;
@@ -51,10 +44,24 @@ class Instruktori(){
             throw new Exception("Non valid value");
         }
 
+        $this->id = $id;
+        $this->jmeno = $jmeno;
+        $this->prijmeni = $prijmeni;
+        $this->telefon = $telefon;
+        $this->email = $email;
+        $this->aktivni = $aktivni;
+
+
     }
 
     function vypis(){
-        
+        // Display instructor details
+        echo "ID: " . $this->id . "<br>";
+        echo "Jméno: " . $this->jmeno . "<br>";
+        echo "Příjmení: " . $this->prijmeni . "<br>";
+        echo "Telefon: " . $this->telefon . "<br>";
+        echo "Email: " . $this->email . "<br>";
+        echo "Aktivní: " . ($this->aktivni ? "Ano" : "Ne") . "<br>";
     }
 
     function vypisOptions(){
