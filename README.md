@@ -1,4 +1,4 @@
-# autoskola
+# Autoškola
 Autoskola prvni rady xd
 
 ## zadání
