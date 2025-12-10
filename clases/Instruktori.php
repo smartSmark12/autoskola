@@ -65,7 +65,7 @@ class Instruktori(){
     }
 
     function vypisOptions(){
-        
+        echo '<option value="' . $this->id . '">' . $this->jmeno . ' ' . $this->prijmeni . '</option>';
     }
 }
 ?>
