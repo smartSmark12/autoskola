@@ -11,3 +11,4 @@ Rozdělte si práci ve skupinách - každý vytvoří jednu z částí - auta ne
 - metodu vypis - výpis vlastností objektu v article
 - metodu vypisOptions - výpis názvu a id v option pro select
 2. php stránku s formulářem pro zadávání dat 
+negr
