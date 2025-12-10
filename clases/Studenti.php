@@ -13,7 +13,7 @@ class Studenti {
 
     function nastavHodnoty($id, $jmeno, $datum_narozeni, $telefon, $email, $datum_registrace) {
 
-        /* checkni hodnoty */
+        /* checkni hodnoty */ /* přidat ještě regex kontroly */
         if (gettype($id) != "integer" or is_null($id)) {
             return false;
         } else if (gettype($jmeno) != "string" or is_null($jmeno)) {
@@ -35,6 +35,14 @@ class Studenti {
         $this->$telefon = $telefon;
         $this->$email = $email;
         $this->$datum_registrace = $datum_registrace;
+    }
+
+    function vypis() {
+
+    }
+
+    function vypisOptions() {
+        
     }
 }
 
