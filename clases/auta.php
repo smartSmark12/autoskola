@@ -6,7 +6,6 @@
         private $poznavaci_znacka;
         private $aktivni;
 
-    }
 
     public function nastavHodnoty($data) {
         if (isset($data["id"]) && $data["id"] !== "") {
@@ -42,3 +41,4 @@
     public function vypisOptions() {
         echo "<option value='{$this->id}'>{$this->znacka} - {$this->model}</options>"
     }
+}    
