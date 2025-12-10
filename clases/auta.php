@@ -6,7 +6,6 @@
         private $poznavaci_znacka;
         private $aktivni;
 
-    }
 
     public function nastavHodnoty($data) {
         if (isset($data["id"]) && $data["id"] !== "") {
@@ -30,3 +29,16 @@
 
     return true;
     }
+
+    public function vypis() {
+        echo "<h3>AUTO ID: {$this->id}</h3>";
+        echo "<p><strong>Značka:</strong> {$this->znacka}</p>";
+        echo "<p><strong>Model:</strong> {$this->model}</p>";
+        echo "<p><strong>SPZ:</strong> {$this->poznavaci_znacka}</p>";
+        echo "<p><strong>Aktivní:</strong> " . ($this->aktivni ? "Ano" : "Ne") . "</p>";
+    }
+
+    public function vypisOptions() {
+        echo "<option value='{$this->id}'>{$this->znacka} - {$this->model}</options>"
+    }
+}    
