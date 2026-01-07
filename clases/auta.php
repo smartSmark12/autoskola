@@ -39,6 +39,6 @@
     }
 
     public function vypisOptions() {
-        echo "<option value='{$this->id}'>{$this->znacka} - {$this->model}</options>"
+        echo "<options value='{$this->id}'>{$this->znacka} - {$this->model}</options>"
     }
 }    
