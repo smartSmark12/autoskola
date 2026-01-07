@@ -11,12 +11,12 @@ class Studenti {
     private $email;
     private $datum_registrace;
 
-    function nastavHodnoty($id, $jmeno, $prijmeni, $datum_narozeni, $telefon, $email, $datum_registrace) {
+    function nastavHodnoty($jmeno, $prijmeni, $datum_narozeni, $telefon, $email, $datum_registrace) {
 
         /* checkni hodnoty */ /* přidat ještě regex kontroly */
-        if (gettype($id) != "integer" or is_null($id)) {
-            return false;
-        } else if (gettype($jmeno) != "string" or is_null($jmeno)) {
+        /* if (gettype($id) != "integer" or is_null($id)) {
+            return false; */
+        if (gettype($jmeno) != "string" or is_null($jmeno)) {
             return false;
         } else if (gettype($prijmeni) != "string" or is_null($prijmeni)) {
             return false;
@@ -51,7 +51,7 @@ class Studenti {
     }
 
     function vypisOptions() {
-        echo "<options value='{$this->id}'>{$this->jmeno} {$this->prijmeni}</options>" /* ukradeno od simona xd */
+        echo "<options value='{$this->id}'>{$this->jmeno} {$this->prijmeni}</options>"; /* ukradeno od simona xd */
     }
 }
 
