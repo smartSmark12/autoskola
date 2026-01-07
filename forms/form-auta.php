@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../clases/Auta.php";
-require_once __DIR__ . "/../clases/AutaDB.php";
+require_once __DIR__ . "/../framework/AutaDB.php";
 
 $auto = null;
 
