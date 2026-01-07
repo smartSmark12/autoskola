@@ -51,7 +51,7 @@ class Studenti {
     }
 
     function vypisOptions() {
-
+        echo "<options value='{$this->$id}'>{$this->$jmeno} {$this->$prijmeni}</options>" /* ukradeno od simona xd */
     }
 }
 
