@@ -9,7 +9,7 @@
 
     public function nastavHodnoty($data) {
         if (isset($data["id"]) && $data["id"] !== "") {
-            if(!ctype_digit($date["id"])) return false;
+            if(!ctype_digit($data["id"])) return false;
             $this->id = intval($data["id"]);
         }
 
@@ -21,11 +21,11 @@
 
     if(!isset($data["poznavaci_znacka"]) || trim($data["poznavaci_znacka"]) == "") return false;
     if(!preg_match("/^[0-9A-Z]{3,10}$/", strtoupper($data["poznavaci_znacka"]))) return false;
-    this->poznavaci_znacka = strtoupper($data["poznavaci_znacka"]);
+    $this->poznavaci_znacka = strtoupper($data["poznavaci_znacka"]);
 
     if(!isset($data["aktivni"])) return false;
     if(!in_array($data["aktivni"], ["0","1"], true)) return false;
-    this->aktivni = intval($data["aktivni"]);
+    $this->aktivni = intval($data["aktivni"]);
 
     return true;
     }
@@ -39,6 +39,6 @@
     }
 
     public function vypisOptions() {
-        echo "<options value='{$this->id}'>{$this->znacka} - {$this->model}</options>"
+        echo "<option value='{$this->id}'>{$this->znacka} - {$this->model}</option>";
     }
 }    
