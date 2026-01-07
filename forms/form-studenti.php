@@ -12,8 +12,8 @@
     <main>
         <?php
 
-        include_once "../framework/studenti_db.php";
-        include_once "../clases/Studenti.php";
+        require_once "../framework/studenti_db.php";
+        require_once "../clases/Studenti.php";
 
         $db = new StudentiDatabase();
 
