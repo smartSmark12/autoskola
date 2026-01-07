@@ -1,5 +1,5 @@
 <?php
-require_once "/clases/Auta.php";
+require_once __DIR__ . "/../clases/Auta.php";
 
 $zprava = "";
 $auto = null;
