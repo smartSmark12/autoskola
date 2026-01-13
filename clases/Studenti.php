@@ -11,12 +11,14 @@ class Studenti {
     private $email;
     private $datum_registrace;
 
-    function nastavHodnoty($id, $jmeno, $datum_narozeni, $telefon, $email, $datum_registrace) {
+    function nastavHodnoty($jmeno, $prijmeni, $datum_narozeni, $telefon, $email, $datum_registrace) {
 
-        /* checkni hodnoty */
-        if (gettype($id) != "integer" or is_null($id)) {
+        /* checkni hodnoty */ /* přidat ještě regex kontroly */
+        /* if (gettype($id) != "integer" or is_null($id)) {
+            return false; */
+        if (gettype($jmeno) != "string" or is_null($jmeno)) {
             return false;
-        } else if (gettype($jmeno) != "string" or is_null($jmeno)) {
+        } else if (gettype($prijmeni) != "string" or is_null($prijmeni)) {
             return false;
         } else if (gettype($datum_narozeni) != "string" or is_null($datum_narozeni)) {
             return false;
@@ -29,13 +31,28 @@ class Studenti {
         }
 
         /* nastav, pokud projdou všechny kontroly */
-        $this->$id = $id;
+        //$this->$id = $id;
         $this->$jmeno = $jmeno;
         $this->$datum_narozeni = $datum_narozeni;
         $this->$telefon = $telefon;
         $this->$email = $email;
         $this->$datum_registrace = $datum_registrace;
     }
+
+    function vypis() {
+        /* vypíše echem data do article */
+        //echo "<h3>ID: ".$this->$id;
+        echo "<p>Jméno: ".$this->$jmeno."</p>";
+        echo "<p>Příjmení: ".$this->$prijmeni."</p>";
+        echo "<p>Datum narození: ".$this->$datum_narozeni."</p>";
+        echo "<p>Telefon: ".$this->$telefon."</p>";
+        echo "<p>Email: ".$this->$email."</p>";
+        echo "<p>Datum registrace: ".$this->$datum_registrace."</p>";
+    }
+
+    /* function vypisOptions() {
+        echo "<options value='{$this->id}'>{$this->jmeno} {$this->prijmeni}</options>"; // ukradeno od simona xd
+    } */
 }
 
 ?>
