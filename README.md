@@ -17,7 +17,7 @@ Rozdělte si práci ve skupinách - každý vytvoří jednu z částí - auta ne
 Pokračujte v projektu autoškola. 🗣️🗣️🗣️
 Každý ke své datové třídě (auta, instruktori, studenti) vytvořte databázovou třídu (autaDB.php, instruktoriDB.php, studentiDB.php) s konstruktorem pro PDO připojení a funkcí pro provedení insert obdobně jako pro tabulku prispevky v databázi prispevky:
 
-```
+```php
 class PrispevekDB{
     private $spojeni;
 
@@ -45,7 +45,7 @@ class PrispevekDB{
 
 Pokračujte v souboru s formulářem, v němž jste si minule nastavili objekt dle odeslaných dat. Zavolejte metodu pro vložení a tento objekt použijte jako její parametr:
 
-```
+```php
 <h1> Příspěvky - vložení do databáze </h1>
 <?php
   if(isset($_POST["ulozit"])) {     //formulář byl odeslán
@@ -75,13 +75,13 @@ zobrazení vlastností objektu ve vhodné html struktuře v article, vhodně nas
 vytvoření položek option s value id a vhodným názvem, vhodně seřazené (např. abecedně)
 
 Po vykonání dotazu select např, z tabulky načteme záznamy pomocí:
-```
+```php
 $sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
 return $sql->fetchAll(); //vrátí pole objektů třídy Auta
 ```
 
 Načítáme-li jeden záznam, pak použijeme:
-```
+```php
 $sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
 return $sql->fetch();   //vrátí objekt třídy Auta
 ```

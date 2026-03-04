@@ -43,7 +43,7 @@
 
 <script>
     function kontrola() {
-        ;
+        ; /* very safe haha fixme */
     }
 </script>
 
