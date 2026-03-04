@@ -17,6 +17,7 @@ Rozdělte si práci ve skupinách - každý vytvoří jednu z částí - auta ne
 Pokračujte v projektu autoškola. 🗣️🗣️🗣️
 Každý ke své datové třídě (auta, instruktori, studenti) vytvořte databázovou třídu (autaDB.php, instruktoriDB.php, studentiDB.php) s konstruktorem pro PDO připojení a funkcí pro provedení insert obdobně jako pro tabulku prispevky v databázi prispevky:
 
+```
 class PrispevekDB{
     private $spojeni;
 
@@ -40,10 +41,12 @@ class PrispevekDB{
         else {return false;}
     }
 }
+```
 
 Pokračujte v souboru s formulářem, v němž jste si minule nastavili objekt dle odeslaných dat. Zavolejte metodu pro vložení a tento objekt použijte jako její parametr:
 
-<h1>Příspěvky - vložení do databáze</h1>
+```
+<h1> Příspěvky - vložení do databáze </h1>
 <?php
   if(isset($_POST["ulozit"])) {     //formulář byl odeslán
     include_once "class_db/Prispevek.php";
@@ -59,6 +62,7 @@ Pokračujte v souboru s formulářem, v němž jste si minule nastavili objekt d
   }
   //formulář
 ?>
+```
 
 ### načtení z databáze
 Pokračujte v projektu autoškola. !!!
@@ -71,12 +75,16 @@ zobrazení vlastností objektu ve vhodné html struktuře v article, vhodně nas
 vytvoření položek option s value id a vhodným názvem, vhodně seřazené (např. abecedně)
 
 Po vykonání dotazu select např, z tabulky načteme záznamy pomocí:
-  $sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
-  return $sql->fetchAll(); //vrátí pole objektů třídy Auta
+```
+$sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
+return $sql->fetchAll(); //vrátí pole objektů třídy Auta
+```
 
 Načítáme-li jeden záznam, pak použijeme:
-  $sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
-  return $sql->fetch();   //vrátí objekt třídy Auta
+```
+$sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
+return $sql->fetch();   //vrátí objekt třídy Auta
+```
 
 ### jízdy
 Pokračujte v projektu Autoškola.
@@ -93,3 +101,11 @@ inputy radio p-plánovaná, u-ukončená, z-zrušená
 Po odeslání se vytvoří objekt, v metodě pro nastavení hodnot se provede kontrola regulárními výrazy, objekt bude předán metodě pro vložení do tabulky. Vypíše se zpráva a vložený záznam jízdy se načte a pomocí metody vypíše ve strukturovaném html.
 
 ### výpis administrativa
+Pokračujte v projektu Autoškola. ☝️☝️
+
+Každý z týmu vypracujte načtení všech záznamů z jedné z tabulek, společně pak vytvořte načtení jízd, kde použijte select s join připojených tabulek, abyste ve výpisu měli jména žáka, instruktora, název a poznávací značku auta atd.
+
+V datové třídě vytvořte metodu pro načtení všech záznamů s možností řazení (možnosti musé být ověřeny pomocí pole).
+Dále vytvořte metodu pro načtení jednoho záznamu podle id.
+
+V datové třídě vytvořte metody pro výpis a pro výpis s odkazy na smazání a editaci, kde se v odkazu předá id záznamu.
