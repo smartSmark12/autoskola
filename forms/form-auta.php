@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulář aut</title>
+    <style>
+.auto-karta {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+.auto-karta h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+.auto-karta ul {
+    list-style: none;
+    padding: 0;
+}
+.auto-karta li {
+    padding: 3px 0;
+}
+</style>
 </head>
 <body>
     <header>
@@ -39,6 +60,7 @@
                 $auto_id = $db->insertAuto($auto);
 
                 if ($auto_id !== false) {
+                    $auto->id = $auto_id; 
                     echo "<h2>Auto bylo úspěšně vloženo (ID: $auto_id)</h2>";
                     $auto->vypis();
                 } else {

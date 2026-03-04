@@ -1,5 +1,5 @@
 <?php
-
+    require_once "../framework/auta_db.php";
 class Auta {
     public $id;           
     public $znacka;
@@ -33,20 +33,22 @@ $this->aktivni = (int)$data["aktivni"];
     public function getZnacka() { return $this->znacka; }
     public function getModel() { return $this->model; }
     public function getPoznavaciZnacka() { return $this->poznavaci_znacka; }
-    public function getAktivni() { return $this->aktivni; }
+    public function getAktivni() { return $this->aktivni; } 
 
-    public function vypis() {
-        echo "<h3>AUTO ID: {$this->id}</h3>";
-        echo "<p><strong>Značka:</strong> {$this->znacka}</p>";
-        echo "<p><strong>Model:</strong> {$this->model}</p>";
-        echo "<p><strong>SPZ:</strong> {$this->poznavaci_znacka}</p>";
-        echo "<p><strong>Aktivní:</strong> " . ($this->aktivni ? "Ano" : "Ne") . "</p>";
-    }
-
+public function vypis() {
+    echo "<article class='auto-karta'>";
+    echo "<h2>" . htmlspecialchars($this->znacka . " " . $this->model) . "</h2>";
+    echo "<ul>";
+    echo "<li><strong>ID:</strong> " . ($this->id ?? "neuvedeno") . "</li>";
+    echo "<li><strong>SPZ:</strong> " . htmlspecialchars($this->poznavaci_znacka ?? "neuvedeno") . "</li>";
+    echo "<li><strong>Stav:</strong> " . (isset($this->aktivni) ? ($this->aktivni ? "Aktivní" : "Neaktivní") : "neuvedeno") . "</li>";
+    echo "</ul>";
+    echo "</article>";
+}
     public function vypisOptions() {
-        echo '<option value="' . htmlspecialchars($this->id) . '">' 
-             . htmlspecialchars($this->znacka . ' - ' . $this->model) 
-             . '</option>';
-    }
+    return '<option value="' . htmlspecialchars($this->id) . '">' .
+           htmlspecialchars($this->znacka . ' ' . $this->model) .
+           '</option>';
+}
 }
 ?>
