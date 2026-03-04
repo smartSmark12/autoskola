@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Počítač: 127.0.0.1:3306
--- Vytvořeno: Sob 29. lis 2025, 18:05
--- Verze serveru: 5.7.31
--- Verze PHP: 7.3.21
+-- Počítač: 127.0.0.1
+-- Vytvořeno: Stř 04. bře 2026, 08:58
+-- Verze serveru: 10.4.32-MariaDB
+-- Verze PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Databáze: `autoskola`
 --
-CREATE DATABASE IF NOT EXISTS `autoskola` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_czech_ci;
-USE `autoskola`;
 
 -- --------------------------------------------------------
 
@@ -29,15 +27,12 @@ USE `autoskola`;
 -- Struktura tabulky `auta`
 --
 
-DROP TABLE IF EXISTS `auta`;
-CREATE TABLE IF NOT EXISTS `auta` (
+CREATE TABLE `auta` (
   `id` int(11) NOT NULL,
-  `znacka` varchar(50) COLLATE utf8mb4_czech_ci NOT NULL,
-  `model` varchar(50) COLLATE utf8mb4_czech_ci NOT NULL,
-  `poznavaci_znacka` varchar(20) COLLATE utf8mb4_czech_ci NOT NULL,
-  `aktivni` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `poznavaci_znacka` (`poznavaci_znacka`) USING BTREE
+  `znacka` varchar(50) NOT NULL,
+  `model` varchar(50) NOT NULL,
+  `poznavaci_znacka` varchar(20) NOT NULL,
+  `aktivni` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
@@ -56,15 +51,13 @@ INSERT INTO `auta` (`id`, `znacka`, `model`, `poznavaci_znacka`, `aktivni`) VALU
 -- Struktura tabulky `instruktori`
 --
 
-DROP TABLE IF EXISTS `instruktori`;
-CREATE TABLE IF NOT EXISTS `instruktori` (
+CREATE TABLE `instruktori` (
   `id` int(11) NOT NULL,
-  `jmeno` varchar(50) COLLATE utf8mb4_czech_ci NOT NULL,
-  `prijmeni` varchar(50) COLLATE utf8mb4_czech_ci NOT NULL,
-  `telefon` varchar(20) COLLATE utf8mb4_czech_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8mb4_czech_ci DEFAULT NULL,
-  `aktivni` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
+  `jmeno` varchar(50) NOT NULL,
+  `prijmeni` varchar(50) NOT NULL,
+  `telefon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `aktivni` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
@@ -81,19 +74,14 @@ INSERT INTO `instruktori` (`id`, `jmeno`, `prijmeni`, `telefon`, `email`, `aktiv
 -- Struktura tabulky `jizdy`
 --
 
-DROP TABLE IF EXISTS `jizdy`;
-CREATE TABLE IF NOT EXISTS `jizdy` (
+CREATE TABLE `jizdy` (
   `id` int(11) NOT NULL,
   `id_studenta` int(11) NOT NULL,
   `id_instruktora` int(11) NOT NULL,
   `id_auta` int(11) NOT NULL,
   `zacatek` datetime NOT NULL,
   `konec` datetime DEFAULT NULL,
-  `stav` enum('p','u','z','') COLLATE utf8mb4_czech_ci NOT NULL DEFAULT 'p' COMMENT 'p-plánovaná, u-ukončená, z-zrušená',
-  PRIMARY KEY (`id`),
-  KEY `id_studenta` (`id_studenta`),
-  KEY `id_instruktora` (`id_instruktora`),
-  KEY `id_auta` (`id_auta`)
+  `stav` enum('p','u','z','') NOT NULL DEFAULT 'p' COMMENT 'p-plánovaná, u-ukončená, z-zrušená'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
@@ -110,29 +98,28 @@ INSERT INTO `jizdy` (`id`, `id_studenta`, `id_instruktora`, `id_auta`, `zacatek`
 -- --------------------------------------------------------
 
 --
--- Zástupná struktura pro pohled `jizdy_view`
--- (See below for the actual view)
+-- Struktura tabulky `jizdy_view`
 --
-DROP VIEW IF EXISTS `jizdy_view`;
-CREATE TABLE IF NOT EXISTS `jizdy_view` (
-`id` int(11)
-,`znacka` varchar(50)
-,`model` varchar(50)
-,`poznavaci_znacka` varchar(20)
-,`zacatek` datetime
-,`konec` datetime
-,`stav` enum('p','u','z','')
-,`instruktor_jmeno` varchar(50)
-,`instruktor_prijmeni` varchar(50)
-,`instruktor_telefon` varchar(20)
-,`instruktor_email` varchar(100)
-,`jmeno` varchar(50)
-,`prijmeni` varchar(50)
-,`telefon` varchar(20)
-,`email` varchar(100)
-,`datum_narozeni` date
-,`datum_registrace` date
-);
+
+CREATE TABLE `jizdy_view` (
+  `id` int(11) NOT NULL,
+  `znacka` varchar(50) DEFAULT NULL,
+  `model` varchar(50) DEFAULT NULL,
+  `poznavaci_znacka` varchar(20) DEFAULT NULL,
+  `zacatek` datetime DEFAULT NULL,
+  `konec` datetime DEFAULT NULL,
+  `stav` enum('p','u','z','') DEFAULT NULL,
+  `instruktor_jmeno` varchar(50) DEFAULT NULL,
+  `instruktor_prijmeni` varchar(50) DEFAULT NULL,
+  `instruktor_telefon` varchar(20) DEFAULT NULL,
+  `instruktor_email` varchar(100) DEFAULT NULL,
+  `jmeno` varchar(50) DEFAULT NULL,
+  `prijmeni` varchar(50) DEFAULT NULL,
+  `telefon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `datum_narozeni` date DEFAULT NULL,
+  `datum_registrace` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 -- --------------------------------------------------------
 
@@ -140,16 +127,14 @@ CREATE TABLE IF NOT EXISTS `jizdy_view` (
 -- Struktura tabulky `studenti`
 --
 
-DROP TABLE IF EXISTS `studenti`;
-CREATE TABLE IF NOT EXISTS `studenti` (
+CREATE TABLE `studenti` (
   `id` int(11) NOT NULL,
-  `jmeno` varchar(50) COLLATE utf8mb4_czech_ci NOT NULL,
-  `prijmeni` varchar(50) COLLATE utf8mb4_czech_ci NOT NULL,
+  `jmeno` varchar(50) NOT NULL,
+  `prijmeni` varchar(50) NOT NULL,
   `datum_narozeni` date DEFAULT NULL,
-  `telefon` varchar(20) COLLATE utf8mb4_czech_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8mb4_czech_ci DEFAULT NULL,
-  `datum_registrace` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `telefon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `datum_registrace` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
@@ -160,5 +145,79 @@ INSERT INTO `studenti` (`id`, `jmeno`, `prijmeni`, `datum_narozeni`, `telefon`, 
 (1, 'Jan', 'Horák', '2008-03-14', '+420622456789', 'horak@google.com', '2025-11-10'),
 (2, 'Petra', 'Veselá', '2006-11-21', '+420745869123', 'vesela@google.com', '2025-12-01');
 
--- --------------------------------------------------------
+--
+-- Indexy pro exportované tabulky
+--
 
+--
+-- Indexy pro tabulku `auta`
+--
+ALTER TABLE `auta`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `poznavaci_znacka` (`poznavaci_znacka`) USING BTREE;
+
+--
+-- Indexy pro tabulku `instruktori`
+--
+ALTER TABLE `instruktori`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexy pro tabulku `jizdy`
+--
+ALTER TABLE `jizdy`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_studenta` (`id_studenta`),
+  ADD KEY `id_instruktora` (`id_instruktora`),
+  ADD KEY `id_auta` (`id_auta`);
+
+--
+-- Indexy pro tabulku `jizdy_view`
+--
+ALTER TABLE `jizdy_view`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexy pro tabulku `studenti`
+--
+ALTER TABLE `studenti`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pro tabulky
+--
+
+--
+-- AUTO_INCREMENT pro tabulku `auta`
+--
+ALTER TABLE `auta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pro tabulku `instruktori`
+--
+ALTER TABLE `instruktori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pro tabulku `jizdy`
+--
+ALTER TABLE `jizdy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
+-- AUTO_INCREMENT pro tabulku `jizdy_view`
+--
+ALTER TABLE `jizdy_view`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pro tabulku `studenti`
+--
+ALTER TABLE `studenti`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,3 +1,5 @@
+<!-- VK -->
+
 <?php
 
 class Database {
