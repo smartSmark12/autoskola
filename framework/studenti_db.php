@@ -18,12 +18,20 @@ class StudentiDatabase extends Database {
         
         $sql = $this->connection->prepare($query);
 
-        $sql->bindParam(":jmeno", $student->get_jmeno());
-        $sql->bindParam(":prijmeni", $student->get_prijmeni());
-        $sql->bindParam(":datum_narozeni", $student->get_datum_narozeni());
-        $sql->bindParam(":telefon", $student->get_telefon());
-        $sql->bindParam(":email", $student->get_email());
-        $sql->bindParam(":datum_registrace", $student->get_datum_registrace());
+        /* get data from student obj ig */
+        $jmeno = $student->get_jmeno();
+        $prijmeni = $student->get_prijmeni();
+        $datum_narozeni = $student->get_datum_narozeni();
+        $telefon = $student->get_telefon();
+        $email = $student->get_email();
+        $datum_registrace = $student->get_datum_registrace();
+
+        $sql->bindParam(":jmeno", $jmeno);
+        $sql->bindParam(":prijmeni", $prijmeni);
+        $sql->bindParam(":datum_narozeni", $datum_narozeni);
+        $sql->bindParam(":telefon", $telefon);
+        $sql->bindParam(":email", $email);
+        $sql->bindParam(":datum_registrace", $datum_registrace);
 
         if($sql->execute()){return $this->connection->lastInsertId();}
         else {return false;}
