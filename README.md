@@ -109,3 +109,10 @@ V datové třídě vytvořte metodu pro načtení všech záznamů s možností 
 Dále vytvořte metodu pro načtení jednoho záznamu podle id.
 
 V datové třídě vytvořte metody pro výpis a pro výpis s odkazy na smazání a editaci, kde se v odkazu předá id záznamu.
+
+### mazání
+Pokračujte v projektu Autoškola.
+
+Každý v týmu přidejte do své databázové třídy metodu pro smazání záznamu určeného pomocí id.
+
+Vytvořte php stránku smazani-trida.php, na níž se přejde z administračního výpisu a která vypíše záznam s daným id a formulář s tlačítkem pro smazání. Po kliknutí na tlačítko se provede smazání záznamu.
