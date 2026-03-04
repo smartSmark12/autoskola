@@ -1,103 +1,80 @@
-<?php
-require_once "../clases/Auta.php";
-
-$zprava = "";
-$auto = null;
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $auto = new Auta();
-
-    if ($auto->nastavHodnoty($_POST)) {
-        $zprava = "Auto bylo úspěšně uloženo.";
-    } else {
-        $zprava = "Chyba: zkontroluj zadaná data.";
-        $auto = null;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>Evidence aut</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #eef1f4;
-            padding: 40px;
-        }
-        .box {
-            max-width: 450px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
-        button {
-            margin-top: 20px;
-            background: #007bff;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .msg {
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .ok { color: green; }
-        .err { color: red; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulář aut</title>
 </head>
 <body>
+    <header>
+        <h1>Přidání auta</h1>
+    </header>
+    <main>
+        <?php
+        require_once "../framework/auta_db.php";
+        require_once "../clases/Auta.php";
 
-<div class="box">
-    <h2>🚗 Přidání auta</h2>
+        
+        $zprava = "";
+        $auto = null;
 
-    <?php if ($zprava): ?>
-        <div class="msg <?= $auto ? 'ok' : 'err' ?>">
-            <?= htmlspecialchars($zprava) ?>
-        </div>
-    <?php endif; ?>
+        $db = new AutaDatabase();
+        
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $auto = new Auta();
 
-    <form method="post">
-        <label>Značka</label>
-        <input type="text" name="znacka" required>
+            $znacka = $_POST['znacka'] ?? '';
+            $model = $_POST['model'] ?? '';
+            $poznavaci_znacka = $_POST['poznavaci_znacka'] ?? '';
+            $aktivni = $_POST['aktivni'] ?? 1;
 
-        <label>Model</label>
-        <input type="text" name="model" required>
+            try {
+                $auto->nastavHodnoty([
+                    "znacka" => $znacka,
+                    "model" => $model,
+                    "poznavaci_znacka" => $poznavaci_znacka,
+                    "aktivni" => $aktivni
+                ]);
 
-        <label>SPZ</label>
-        <input type="text" name="poznavaci_znacka" required>
+                $auto_id = $db->insertAuto($auto);
 
-        <label>Aktivní</label>
-        <select name="aktivni">
-            <option value="1">Ano</option>
-            <option value="0">Ne</option>
-        </select>
+                if ($auto_id !== false) {
+                    echo "<h2>Auto bylo úspěšně vloženo (ID: $auto_id)</h2>";
+                    $auto->vypis();
+                } else {
+                    echo "<h2>Chyba: Auto se nepodařilo uložit.</h2>";
+                }
+            } catch (Exception $e) {
+                echo '<h2>Chyba: ' . htmlspecialchars($e->getMessage()) . '</h2>';
+                $zprava = "Chyba: " . $e->getMessage();
+                $auto = null;
+            }
+        }
+        ?>
 
-        <button type="submit">Uložit auto</button>
-    </form>
+        <form method="post" onsubmit="return kontrola();">
+            <input type="text" name="znacka" placeholder="Značka" required>
+            <input type="text" name="model" placeholder="Model" required>
+            <input type="text" name="poznavaci_znacka" placeholder="SPZ" required>
+            <select name="aktivni">
+                <option value="1">Aktivní</option>
+                <option value="0">Neaktivní</option>
+            </select>
+            <button type="submit">Uložit auto</button>
+        </form>
+    </main>
 
-    <?php
-    if ($auto) {
-        echo "<hr>";
-        $auto->vypis();
+    <script>
+    function kontrola() {
+        var znacka = document.querySelector('input[name="znacka"]').value.trim();
+        var model = document.querySelector('input[name="model"]').value.trim();
+        var spz = document.querySelector('input[name="poznavaci_znacka"]').value.trim();
+        if (!znacka || !model || !spz) {
+            alert('Vyplňte všechny povinné údaje.');
+            return false;
+        }
+        return true;
     }
-    ?>
-</div>
-
+    </script>
 </body>
 </html>
