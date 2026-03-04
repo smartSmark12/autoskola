@@ -54,6 +54,39 @@ class AutaDatabase extends Database {
             return false;
         }
     }
+    public function getAll($orderBy = "znacka ASC") {
+    $allowed = ["id", "znacka", "model", "poznavaci_znacka", "aktivni"];
+
+
+    $parts = explode(" ", $orderBy);
+    $column = $parts[0];
+    $direction = strtoupper($parts[1] ?? "ASC");
+
+    if (!in_array($column, $allowed)) {
+        $column = "znacka";
+    }
+
+    if (!in_array($direction, ["ASC", "DESC"])) {
+        $direction = "ASC";
+    }
+
+    $query = "SELECT * FROM auta ORDER BY $column $direction";
+    $sql = $this->connection->prepare($query);
+    $sql->execute();
+
+    $sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
+    return $sql->fetchAll(); 
+}
+
+public function getById($id) {
+    $query = "SELECT * FROM auta WHERE id = :id";
+    $sql = $this->connection->prepare($query);
+    $sql->bindValue(":id", $id, PDO::PARAM_INT);
+    $sql->execute();
+
+    $sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
+    return $sql->fetch(); 
+}
 }
 
 ?>
