@@ -3,6 +3,9 @@
 include_once "database.php";
 
 class StudentiDatabase extends Database {
+
+    private $connection;
+
     function __construct() {
         $this->connection = $this->connect();
     }
