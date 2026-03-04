@@ -1,3 +1,5 @@
+<!-- VK -->
+
 <?php
 
 include_once "database.php";
@@ -15,12 +17,12 @@ class StudentiDatabase extends Database {
         
         $sql = $this->connection->prepare($query);
 
-        $sql->bindParam(":jmeno", $student->jmeno);
-        $sql->bindParam(":prijmeni", $student->prijmeni);
-        $sql->bindParam(":datum_narozeni", $student->datum_narozeni);
-        $sql->bindParam(":telefon", $student->telefon);
-        $sql->bindParam(":email", $student->email);
-        $sql->bindParam(":datum_registrace", $student->datum_registrace);
+        $sql->bindParam(":jmeno", $student->get_jmeno());
+        $sql->bindParam(":prijmeni", $student->get_prijmeni());
+        $sql->bindParam(":datum_narozeni", $student->get_datum_narozeni());
+        $sql->bindParam(":telefon", $student->get_telefon());
+        $sql->bindParam(":email", $student->get_email());
+        $sql->bindParam(":datum_registrace", $student->get_datum_registrace());
 
         if($sql->execute()){return $this->connection->lastInsertId();}
         else {return false;}

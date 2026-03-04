@@ -50,6 +50,31 @@ class Studenti {
         echo "<p>Datum registrace: ".$this->datum_registrace."</p>";
     }
 
+    /* toto bolí */
+    public function get_jmeno() {
+        return $this->jmeno;
+    }
+
+    public function get_prijmeni() {
+        return $this->prijmeni;
+    }
+
+    public function get_datum_narozeni() {
+        return $this->datum_narozeni;
+    }
+
+    public function get_telefon() {
+        return $this->telefon;
+    }
+
+    public function get_email() {
+        return $this->email;
+    }
+
+    public function get_datum_registrace() {
+        return $this->datum_registrace;
+    }
+
     /* function vypisOptions() {
         echo "<options value='{$this->id}'>{$this->jmeno} {$this->prijmeni}</options>"; // ukradeno od simona xd
     } */
