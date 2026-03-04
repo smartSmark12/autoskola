@@ -33,6 +33,7 @@ class Studenti {
         /* nastav, pokud projdou všechny kontroly */
         //$this->$id = $id;
         $this->jmeno = $jmeno;
+        $this->prijmeni = $prijmeni;
         $this->datum_narozeni = $datum_narozeni;
         $this->telefon = $telefon;
         $this->email = $email;

@@ -101,7 +101,7 @@ inputy radio p-plánovaná, u-ukončená, z-zrušená
 Po odeslání se vytvoří objekt, v metodě pro nastavení hodnot se provede kontrola regulárními výrazy, objekt bude předán metodě pro vložení do tabulky. Vypíše se zpráva a vložený záznam jízdy se načte a pomocí metody vypíše ve strukturovaném html.
 
 ### výpis administrativa
-Pokračujte v projektu Autoškola. ☝️☝️
+Pokračujte v projektu Autoškola.
 
 Každý z týmu vypracujte načtení všech záznamů z jedné z tabulek, společně pak vytvořte načtení jízd, kde použijte select s join připojených tabulek, abyste ve výpisu měli jména žáka, instruktora, název a poznávací značku auta atd.
 
@@ -110,9 +110,13 @@ Dále vytvořte metodu pro načtení jednoho záznamu podle id.
 
 V datové třídě vytvořte metody pro výpis a pro výpis s odkazy na smazání a editaci, kde se v odkazu předá id záznamu.
 
+Společně vypracujte výpis administrace jízd. Přidejte možnost řazení výpisu kliknutím na odkaz (od nejstarších, od nejnovějších, podle jmen studentů, podle jmen instruktorů, podle značky auta apod.)
+
 ### mazání
 Pokračujte v projektu Autoškola.
 
 Každý v týmu přidejte do své databázové třídy metodu pro smazání záznamu určeného pomocí id.
 
 Vytvořte php stránku smazani-trida.php, na níž se přejde z administračního výpisu a která vypíše záznam s daným id a formulář s tlačítkem pro smazání. Po kliknutí na tlačítko se provede smazání záznamu.
+
+Společně vypracujte smazání jízdy.

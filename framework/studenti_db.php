@@ -13,7 +13,8 @@ class StudentiDatabase extends Database {
     }
 
     public function insertStudent($student) {
-        $query = "insert into studenti (id,jmeno,prijmeni,datum_narozeni,telefon,email,datum_registrace) values (NULL,:jmeno,:prijmeni,:datum_narozeni,:telefon,:email,:datum_registrace)";
+        $query =    "INSERT INTO studenti (id,jmeno,prijmeni,datum_narozeni,telefon,email,datum_registrace)
+                    VALUES (NULL,:jmeno,:prijmeni,:datum_narozeni,:telefon,:email,:datum_registrace)";
         
         $sql = $this->connection->prepare($query);
 
