@@ -1,6 +1,7 @@
 /* VK? */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* pro main mainly */
 * {
     margin: 0;
     text-decoration: none;
@@ -23,7 +24,7 @@ main {
 main > div {
     margin: 1%;
     padding: 2%;
-    
+
     background-color: var(--lighter);
     border-radius: 5px;
 }
@@ -50,4 +51,20 @@ main > div > h2 {
 
     background-color: var(--buttons);
     border-radius: 5px;
+}
+
+/* pro forms */ /* toto musí někdo předělat istg */
+form.styled-panel {
+    margin: 1%;
+    padding: 2%;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--lighter);
+    border-radius: 5px;
+}
+
+form.styled-panel > input {
+    margin: .3%;
 }

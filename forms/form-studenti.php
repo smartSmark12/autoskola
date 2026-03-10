@@ -6,10 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studenti form</title>
+    <link rel="stylesheet" href="../bordel/style.css">
 </head>
 <body>
     <header>
-        <h1>Studenti</h1>
+        <h1>Studenti vložení</h1>
     </header>
     <main>
         <?php
@@ -31,7 +32,7 @@
         }
 
         ?>
-        <form method="post", onsubmit=kontrola>
+        <form method="post", onsubmit=kontrola class="styled-panel">
             <input type="text" name="jmeno" placeholder="jméno">
             <input type="text" name="prijmeni" placeholder="příjmení">
             <input type="date" name="datum_narozeni" placeholder="datum narození">
