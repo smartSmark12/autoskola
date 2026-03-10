@@ -98,3 +98,16 @@ form.styled-panel > button {
     color: whitesmoke;
     background-color: limegreen;
 }
+
+/* pro display form */
+.display-card {
+    margin: 1%;
+    padding: 2%;
+
+    background-color: var(--buttons);
+    border-radius: 6px;
+}
+
+.display-card > h2 {
+    margin-bottom: 5px;
+}

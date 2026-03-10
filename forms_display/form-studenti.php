@@ -13,27 +13,21 @@
         <h1>Studenti načtení</h1>
     </header>
     <main>
-        <?php
+        <div class="panel-vypis">
+            <?php
 
-        require_once "../framework/studenti_db.php";
-        require_once "../clases/Studenti.php";
+            require_once "../framework/studenti_db.php";
+            require_once "../clases/Studenti.php";
 
-        $db = new StudentiDatabase();
+            $db = new StudentiDatabase();
 
-        if (isset($_POST["jmeno"])) {
-            $student = new Studenti();
-            
-            $student->nastavHodnoty($_POST["jmeno"],$_POST["prijmeni"],$_POST["datum_narozeni"],$_POST["telefon"],$_POST["email"],$_POST["datum_registrace"]);
+            $students = $db->readStudents();
 
-            $student_id = $db->insertStudent($student);
+            foreach($students as $student){
+                echo $student->vypisArticle();
+            }
 
-            if($student_id > 0){echo "<h2>Data byla vložena</h2>\n"; }
-            else {echo "<h2>Data nebyla vložena</h2>\n";}
-        }
-
-        ?>
-        <div class="article-vypis">
-            
+            ?>
         </div>
     </main>
 </body>

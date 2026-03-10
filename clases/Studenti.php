@@ -51,6 +51,19 @@ class Studenti {
         echo "<p>Datum registrace: ".$this->datum_registrace."</p>";
     }
 
+    public function vypisArticle() {
+        /* na použití pro actually useful formát */
+        echo "
+        <article class='display-card'>
+            <h2>".$this->jmeno." ".$this->prijmeni."</h2>
+            <p><strong>Datum narození:</strong> ".$this->datum_narozeni."</p>
+            <p><strong>Telefon:</strong> ".$this->telefon."</p>
+            <p><strong>Email:</strong> ".$this->email."</p>
+            <p><strong>Registrován:</strong> ".$this->datum_registrace."</p>
+        </article>
+        ";
+    }
+
     /* toto bolí */
     public function get_jmeno() {
         return $this->jmeno;
