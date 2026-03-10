@@ -36,6 +36,54 @@ class StudentiDatabase extends Database {
         if($sql->execute()){return $this->connection->lastInsertId();}
         else {return false;}
     }
+
+    public function readStudents($sortBy = "prijmeni") {
+
+        /* kontrola kvůli injection ✨✨😭 */
+        $allowed = ["id","jmeno","prijmeni","datum_narozeni","datum_registrace"];
+
+        if(!in_array($sortBy, $allowed)){
+            $sortBy = "prijmeni";
+        }
+
+        $query = "SELECT * FROM studenti ORDER BY $sortBy";
+
+        $sql = $this->connection->prepare($query);
+        $sql->execute();
+
+        $sql->setFetchMode(PDO::FETCH_CLASS, "Studenti");
+
+        $data = $sql->fetchAll();
+
+        /* vykreslení */
+        foreach ($data as $key => $student) {
+            "
+            <article class='student'>
+                <h2>{$this->jmeno} {$this->prijmeni}</h2>
+                <p><strong>Datum narození:</strong> {$this->datum_narozeni}</p>
+                <p><strong>Telefon:</strong> {$this->telefon}</p>
+                <p><strong>Email:</strong> {$this->email}</p>
+                <p><strong>Registrován:</strong> {$this->datum_registrace}</p>
+            </article> /* uuuuhhhhhhh stop it */
+            ";
+        }
+    }
+
+    public function readStudent($id) {
+
+        /* id kontrolalalallaaa 🎵 ig not- */
+        /* if ($id < 0) */
+
+        $query = "SELECT * FROM studenti WHERE id = :id";
+
+        $sql = $this->connection->prepare($query);
+        $sql->bindParam(":id", $id);
+        $sql->execute();
+
+        $sql->setFetchMode(PDO::FETCH_CLASS, "Student");
+
+        return $sql->fetch();
+    }
 }
 
 ?>
