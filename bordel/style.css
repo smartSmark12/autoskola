@@ -94,5 +94,7 @@ form.styled-panel > *::placeholder {
 }
 
 form.styled-panel > button {
+    border-radius: 6px;
     color: whitesmoke;
+    background-color: limegreen;
 }
