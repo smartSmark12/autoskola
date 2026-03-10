@@ -12,7 +12,7 @@
     <header>
         <h1>Studenti vložení</h1>
     </header>
-    <main>
+    <main class="styled-panel-container">
         <?php
 
         require_once "../framework/studenti_db.php";
@@ -33,13 +33,19 @@
 
         ?>
         <form method="post", onsubmit=kontrola class="styled-panel">
-            <input type="text" name="jmeno" placeholder="jméno">
-            <input type="text" name="prijmeni" placeholder="příjmení">
-            <input type="date" name="datum_narozeni" placeholder="datum narození">
-            <input type="text" name="telefon" placeholder="telefon">
-            <input type="text" name="email" placeholder="e-mail">
-            <input type="date" name="datum_registrace" placeholder="datum registrace">
-            <button type="submit">:3333</button>
+            <label for="jmeno">Jméno</label>
+            <input type="text" name="jmeno"> <!--  placeholder="jméno" -->
+            <label for="prijmeni">Příjmení</label>
+            <input type="text" name="prijmeni"> <!--  placeholder="příjmení" -->
+            <label for="datum_narozeni">Datum narození</label>
+            <input type="date" name="datum_narozeni"> <!--  placeholder="datum narození" -->
+            <label for="telefon">Telefon</label>
+            <input type="text" name="telefon"> <!--  placeholder="telefon" -->
+            <label for="email">E-mail</label>
+            <input type="text" name="email"> <!-- placeholder="e-mail" -->
+            <label for="datum_registrace">Datum registrace</label>
+            <input type="date" name="datum_registrace"> <!--  placeholder="datum registrace" -->
+            <button type="submit">Vložit</button>
         </form>
     </main>
 </body>

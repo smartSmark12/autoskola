@@ -11,6 +11,7 @@
     --darker: rgb(37, 37, 37);
     --lighter: rgb(92, 92, 92);
     --buttons: gray;
+    --inputs: rgb(39, 39, 39);
 }
 
 body {
@@ -54,8 +55,16 @@ main > div > h2 {
 }
 
 /* pro forms */ /* toto musí někdo předělat istg */
+main.styled-panel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 form.styled-panel {
     margin: 1%;
+    width: 20%;
+    min-width: 200px;
     padding: 2%;
 
     display: flex;
@@ -65,6 +74,25 @@ form.styled-panel {
     border-radius: 5px;
 }
 
-form.styled-panel > input {
-    margin: .3%;
+form.styled-panel > button, form.styled-panel > input {
+    margin: 1%;
+    padding: 4px;
+
+    background-color: var(--inputs);
+}
+
+form.styled-panel > input {    
+    border-radius: 6px;
+}
+
+form.styled-panel > label {
+    margin-top: 5px;
+}
+
+form.styled-panel > *::placeholder {
+    color: rgb(168, 168, 168);
+}
+
+form.styled-panel > button {
+    color: whitesmoke;
 }
