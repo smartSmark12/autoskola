@@ -12,6 +12,7 @@
     --lighter: rgb(92, 92, 92);
     --buttons: gray;
     --inputs: rgb(39, 39, 39);
+    --submit-color-haha: limegreen;
 }
 
 body {
@@ -96,11 +97,27 @@ form.styled-panel > *::placeholder {
 form.styled-panel > button {
     border-radius: 6px;
     color: whitesmoke;
-    background-color: limegreen;
+    background-color: var(--submit-color-haha);
 }
 
 /* pro display form */
-.display-card {
+.display-form {
+    margin: 1%;
+    padding: 2%;
+
+    background-color: var(--lighter);
+    border-radius: 6px;
+}
+
+.display-form > select {
+    background-color: var(--inputs);
+}
+
+.display-form > button {
+    background-color: var(--submit-color-haha);
+}
+
+article.display-card {
     margin: 1%;
     padding: 2%;
 
@@ -108,6 +125,6 @@ form.styled-panel > button {
     border-radius: 6px;
 }
 
-.display-card > h2 {
+article.display-card > h2 {
     margin-bottom: 5px;
 }

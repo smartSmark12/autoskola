@@ -13,6 +13,18 @@
         <h1>Studenti načtení</h1>
     </header>
     <main>
+        <form method="POST" class="display-form">
+            <label for="sort"><strong>Řazení:</strong></label>
+            <select name="sort" id="sort">
+                <option value="prijmeni">Příjmení</option>
+                <option value="jmeno">Jméno</option>
+                <option value="datum_narozeni">Datum narození</option>
+                <option value="datum_registrace">Datum registrace</option>
+            </select>
+
+            <button type="submit">Načíst</button>
+        </form>
+
         <div class="panel-vypis">
             <?php
 
@@ -21,10 +33,13 @@
 
             $db = new StudentiDatabase();
 
-            $students = $db->readStudents();
+            if (isset($_POST["sort"]))  {
 
-            foreach($students as $student){
-                echo $student->vypisArticle();
+                $students = $db->readStudents($_POST["sort"]);
+
+                foreach($students as $student){
+                    echo $student->vypisArticle();
+                }
             }
 
             ?>
