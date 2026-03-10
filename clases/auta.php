@@ -37,7 +37,8 @@ $this->aktivni = (int)$data["aktivni"];
 
 public function vypis() {
     echo "<article class='auto-karta'>";
-    echo "<h2>" . htmlspecialchars($this->znacka . " " . $this->model) . "</h2>";
+    echo "<h2>" . htmlspecialchars($this->znacka) . "</h2>";
+    echo "<h2>" . htmlspecialchars($this->model) . "</h2>";
     echo "<ul>";
     echo "<li><strong>ID:</strong> " . ($this->id ?? "neuvedeno") . "</li>";
     echo "<li><strong>SPZ:</strong> " . htmlspecialchars($this->poznavaci_znacka ?? "neuvedeno") . "</li>";
@@ -49,6 +50,21 @@ public function vypis() {
     return '<option value="' . htmlspecialchars($this->id) . '">' .
            htmlspecialchars($this->znacka . ' ' . $this->model) .
            '</option>';
+}
+public function vypisAdmin() {
+    echo "<article class='auto-karta'>";
+    echo "<h2>" . htmlspecialchars($this->znacka) . "</h2>";
+    echo "<h2>" . htmlspecialchars($this->model) . "</h2>";
+    echo "<ul>";
+    echo "<li><strong>ID:</strong> " . $this->id . "</li>";
+    echo "<li><strong>SPZ:</strong> " . htmlspecialchars($this->poznavaci_znacka) . "</li>";
+    echo "<li><strong>Stav:</strong> " . ($this->aktivni ? "Aktivní" : "Neaktivní") . "</li>";
+    echo "</ul>";
+
+    echo "<a href='auto-admin.php?id=".$this->id."'>✏️ Upravit</a> | ";
+    echo "<a href='../forms_remove/auta-smazani.php?id=".$this->id."'>🗑️ Smazat</a>";
+
+    echo "</article>";
 }
 }
 ?>

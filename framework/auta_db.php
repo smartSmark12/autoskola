@@ -87,6 +87,13 @@ public function getById($id) {
     $sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
     return $sql->fetch(); 
 }
+public function deleteById($id) {
+    $query = "DELETE FROM auta WHERE id = :id";
+    $sql = $this->connection->prepare($query);
+    $sql->bindValue(":id", $id, PDO::PARAM_INT);
+
+    return $sql->execute();
+}
 }
 
 ?>
