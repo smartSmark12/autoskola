@@ -13,27 +13,36 @@
         <h1>Studenti načtení</h1>
     </header>
     <main>
-        <?php
+        <form method="POST" class="display-form">
+            <label for="sort"><strong>Řazení:</strong></label>
+            <select name="sort" id="sort">
+                <option value="prijmeni">Příjmení</option>
+                <option value="jmeno">Jméno</option>
+                <option value="datum_narozeni">Datum narození</option>
+                <option value="datum_registrace">Datum registrace</option>
+            </select>
 
-        require_once "../framework/studenti_db.php";
-        require_once "../clases/Studenti.php";
+            <button type="submit">Načíst</button>
+        </form>
 
-        $db = new StudentiDatabase();
+        <div class="panel-vypis">
+            <?php
 
-        if (isset($_POST["jmeno"])) {
-            $student = new Studenti();
-            
-            $student->nastavHodnoty($_POST["jmeno"],$_POST["prijmeni"],$_POST["datum_narozeni"],$_POST["telefon"],$_POST["email"],$_POST["datum_registrace"]);
+            require_once "../framework/studenti_db.php";
+            require_once "../clases/Studenti.php";
 
-            $student_id = $db->insertStudent($student);
+            $db = new StudentiDatabase();
 
-            if($student_id > 0){echo "<h2>Data byla vložena</h2>\n"; }
-            else {echo "<h2>Data nebyla vložena</h2>\n";}
-        }
+            if (isset($_POST["sort"]))  {
 
-        ?>
-        <div class="article-vypis">
-            
+                $students = $db->readStudents($_POST["sort"]);
+
+                foreach($students as $student){
+                    echo $student->vypisArticle();
+                }
+            }
+
+            ?>
         </div>
     </main>
 </body>

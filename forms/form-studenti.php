@@ -27,24 +27,24 @@
 
             $student_id = $db->insertStudent($student);
 
-            if($student_id > 0){echo "<h2>Data byla vložena</h2>\n"; }
-            else {echo "<h2>Data nebyla vložena</h2>\n";}
+            /* if($student_id > 0){echo "<h2>Data byla vložena</h2>\n"; }
+            else {echo "<h2>Data nebyla vložena</h2>\n";} */
         }
 
         ?>
         <form method="post", onsubmit=kontrola class="styled-panel">
             <label for="jmeno">Jméno</label>
-            <input type="text" name="jmeno"> <!--  placeholder="jméno" -->
+            <input type="text" name="jmeno" required> <!--  placeholder="jméno" -->
             <label for="prijmeni">Příjmení</label>
-            <input type="text" name="prijmeni"> <!--  placeholder="příjmení" -->
+            <input type="text" name="prijmeni" required> <!--  placeholder="příjmení" -->
             <label for="datum_narozeni">Datum narození</label>
-            <input type="date" name="datum_narozeni"> <!--  placeholder="datum narození" -->
+            <input type="date" name="datum_narozeni" required> <!--  placeholder="datum narození" -->
             <label for="telefon">Telefon</label>
-            <input type="text" name="telefon"> <!--  placeholder="telefon" -->
+            <input type="text" name="telefon" required> <!--  placeholder="telefon" -->
             <label for="email">E-mail</label>
-            <input type="text" name="email"> <!-- placeholder="e-mail" -->
+            <input type="text" name="email" required> <!-- placeholder="e-mail" -->
             <label for="datum_registrace">Datum registrace</label>
-            <input type="date" name="datum_registrace"> <!--  placeholder="datum registrace" -->
+            <input type="date" name="datum_registrace" required> <!--  placeholder="datum registrace" -->
             <button type="submit">Vložit</button>
         </form>
     </main>

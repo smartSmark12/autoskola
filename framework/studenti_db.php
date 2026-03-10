@@ -53,20 +53,7 @@ class StudentiDatabase extends Database {
 
         $sql->setFetchMode(PDO::FETCH_CLASS, "Studenti");
 
-        $data = $sql->fetchAll();
-
-        /* vykreslení */
-        foreach ($data as $key => $student) {
-            "
-            <article class='student'>
-                <h2>{$this->jmeno} {$this->prijmeni}</h2>
-                <p><strong>Datum narození:</strong> {$this->datum_narozeni}</p>
-                <p><strong>Telefon:</strong> {$this->telefon}</p>
-                <p><strong>Email:</strong> {$this->email}</p>
-                <p><strong>Registrován:</strong> {$this->datum_registrace}</p>
-            </article> /* uuuuhhhhhhh stop it */
-            ";
-        }
+        return $sql->fetchAll();
     }
 
     public function readStudent($id) {
