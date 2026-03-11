@@ -56,6 +56,7 @@ class Studenti {
         echo "
         <article class='display-card'>
             <h2>".$this->jmeno." ".$this->prijmeni."</h2>
+            <p><strong>ID:</strong> ".$this->id."</p>
             <p><strong>Datum narození:</strong> ".$this->datum_narozeni."</p>
             <p><strong>Telefon:</strong> ".$this->telefon."</p>
             <p><strong>Email:</strong> ".$this->email."</p>
