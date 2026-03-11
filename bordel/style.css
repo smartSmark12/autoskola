@@ -75,14 +75,14 @@ form.styled-panel {
     border-radius: 5px;
 }
 
-form.styled-panel > button, form.styled-panel > input {
+form.styled-panel > button, form.styled-panel > input, form.styled-panel > select {
     margin: 1%;
     padding: 4px;
 
     background-color: var(--inputs);
 }
 
-form.styled-panel > input {    
+form.styled-panel > input, form.styled-panel > select {    
     border-radius: 6px;
 }
 

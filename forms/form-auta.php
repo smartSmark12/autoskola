@@ -31,7 +31,7 @@
     <header>
         <h1>Přidání auta</h1>
     </header>
-    <main>
+    <main class="styled-panel-container">
         <?php
         require_once "../framework/auta_db.php";
         require_once "../clases/auta.php";
