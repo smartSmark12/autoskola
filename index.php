@@ -30,7 +30,7 @@
         <div>
             <h2>Výpis záznamů</h2>
             <div class="form-list">
-                <a href="forms_display/form-auta.php">Auta výpis</a>
+                <a href="forms_display/auta-admin.php">Auta výpis</a>
                 <a href="forms_display/form-instruktori.php">Instruktoři výpis</a>
                 <a href="forms_display/form-studenti.php">Studenti výpis</a>
                 <a href="forms_display/form-jizdy.php">Jízdy výpis</a>
