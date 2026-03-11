@@ -121,12 +121,23 @@ article.display-card {
     margin: 1%;
     padding: 2%;
 
+    display: flex;
+    flex-direction: column;
+
     background-color: var(--buttons);
     border-radius: 6px;
 }
 
 article.display-card > h2 {
     margin-bottom: 5px;
+}
+
+article.display-card > a {
+    background-color: red;
+    padding: 2px;
+    margin-top: 5px;
+    border-radius: 3px;
+    width: max-content;
 }
 
 .flex-main {
