@@ -12,7 +12,7 @@
     <header>
         <h1>Studenti načtení</h1>
     </header>
-    <main>
+    <main class="flex-main">
         <form method="POST" class="display-form">
             <label for="sort"><strong>Řazení:</strong></label>
             <select name="sort" id="sort">

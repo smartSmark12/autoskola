@@ -13,11 +13,11 @@ $instruktori = $db->getAll();
 <link rel="stylesheet" href="../bordel/style.css">
 <body>
     <h1>Seznam instruktorů</h1>
-    <main class="styled-panel-container">
+    <main class="flex-main">
         <div class="panel-vypis">
             <!-- Loop through all instructors and display each one -->
             <?php foreach ($instruktori as $i): ?>
-                <article style="border: 1px solid gray; margin: 10px; padding: 10px;">
+                <article class="display-card"> <!-- style="border: 1px solid gray; margin: 10px; padding: 10px;" -->
                     <?php $i->vypis(); ?>
                     <a href="../forms_remove/form-instruktori.php?id=<?php echo $i->getId(); ?>">Smazat</a>
                 </article>

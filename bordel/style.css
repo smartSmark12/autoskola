@@ -128,3 +128,15 @@ article.display-card {
 article.display-card > h2 {
     margin-bottom: 5px;
 }
+
+.flex-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel-vypis {
+    width: 40%;
+    min-width: 200px;
+}
