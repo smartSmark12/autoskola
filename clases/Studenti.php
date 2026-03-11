@@ -60,6 +60,7 @@ class Studenti {
             <p><strong>Telefon:</strong> ".$this->telefon."</p>
             <p><strong>Email:</strong> ".$this->email."</p>
             <p><strong>Registrován:</strong> ".$this->datum_registrace."</p>
+            <a href='../forms_remove/form-studenti.php?id=".$this->id."'>Smazat</a>
         </article>
         ";
     }
