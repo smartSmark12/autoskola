@@ -1,5 +1,3 @@
-<!-- VK -->
-
 <!DOCTYPE html>
 <html lang="cz">
 <head>
@@ -17,6 +15,7 @@
                 <a href="forms/form-auta.php">Auta vložení</a>
                 <a href="forms/form-instruktori.php">Instruktoři vložení</a>
                 <a href="forms/form-studenti.php">Studenti vložení</a>
+                <a href="forms/form-jizdy.php">Jízdy vložení</a>
             </div>
         </div>
         <div>
@@ -25,14 +24,16 @@
                 <a href="forms_remove/auta-smazani.php">Auta odebrání</a>
                 <a href="forms_remove/form-instruktori.php">Instruktoři odebrání</a>
                 <a href="forms_remove/form-studenti.php">Studenti odebrání</a>
+                <a href="forms_remove/form-jizdy.php">Jízdy odebrání</a>
             </div>
         </div>
         <div>
             <h2>Výpis záznamů</h2>
             <div class="form-list">
-                <a href="forms_display/auta-admin.php">Auta výpis</a>
+                <a href="forms_display/form-auta.php">Auta výpis</a>
                 <a href="forms_display/form-instruktori.php">Instruktoři výpis</a>
                 <a href="forms_display/form-studenti.php">Studenti výpis</a>
+                <a href="forms_display/form-jizdy.php">Jízdy výpis</a>
             </div>
         </div>
         <div>
