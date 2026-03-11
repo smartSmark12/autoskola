@@ -23,6 +23,10 @@
 }
 .auto-karta li {
     padding: 3px 0;
+    color: #2c3e50;
+}
+.auto-karta li strong {
+     color: #2c3e50;
 }
 </style>
 <link rel="stylesheet" href="../bordel/style.css">
