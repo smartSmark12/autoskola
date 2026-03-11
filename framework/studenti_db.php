@@ -71,6 +71,13 @@ class StudentiDatabase extends Database {
 
         return $sql->fetch();
     }
+
+    public function delete($id) {
+        $query = "DELETE FROM studenti WHERE id = :id";
+        $sql = $this->connection->prepare($query);
+        $sql->bindValue(":id", $id, PDO::PARAM_INT);
+        return $sql->execute();
+    }
 }
 
 ?>
