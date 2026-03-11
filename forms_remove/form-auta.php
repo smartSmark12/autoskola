@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($db->deleteById($id)) {
         echo "<h2>Auto bylo smazáno.</h2>";
-        echo "<a href='../forms_display/auta-admin.php'>Zpět na administraci</a>";
+        echo "<a href='../forms_display/form-auta.php'>Zpět na administraci</a>";
         exit;
     } else {
         echo "<h2>Chyba při mazání.</h2>";
@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
 <meta charset="UTF-8">
 <title>Smazání auta</title>
+<link rel="stylesheet" href="../bordel/style.css">
 </head>
 
 <body>
@@ -54,7 +55,7 @@ $auto->vypis();
 
 <br>
 
-<a href="../forms_display/auta-admin.php">Zpět</a>
+<a href="../forms_display/form-auta.php">Zpět</a>
 
 </body>
 </html>

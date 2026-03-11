@@ -21,7 +21,7 @@
         <div>
             <h2>Odebírání záznamů</h2>
             <div class="form-list">
-                <a href="forms_remove/auta-smazani.php">Auta odebrání</a>
+                <a href="forms_remove/form-auta.php">Auta odebrání</a>
                 <a href="forms_remove/form-instruktori.php">Instruktoři odebrání</a>
                 <a href="forms_remove/form-studenti.php">Studenti odebrání</a>
                 <a href="forms_remove/form-jizdy.php">Jízdy odebrání</a>

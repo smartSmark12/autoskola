@@ -25,6 +25,7 @@
     padding: 3px 0;
 }
 </style>
+<link rel="stylesheet" href="../bordel/style.css">
 </head>
 <body>
     <header>
@@ -74,7 +75,7 @@
         }
         ?>
 
-        <form method="post" onsubmit="return kontrola();">
+        <form method="post" onsubmit="return kontrola();" class="styled-panel">
             <input type="text" name="znacka" placeholder="Značka" required>
             <input type="text" name="model" placeholder="Model" required>
             <input type="text" name="poznavaci_znacka" placeholder="SPZ" required>

@@ -14,6 +14,7 @@ $auta = $db->getAll($order);
 <head>
 <meta charset="UTF-8">
 <title>Administrace aut</title>
+<link rel="stylesheet" href="../bordel/style.css">
 </head>
 
 <body>
