@@ -61,7 +61,7 @@ public function vypisAdmin() {
     echo "<li><strong>Stav:</strong> " . ($this->aktivni ? "Aktivní" : "Neaktivní") . "</li>";
     echo "</ul>";
 
-    echo "<a href='form-auta.php?id=".$this->id."'>✏️ Upravit</a> | ";
+    echo "<a href='../forms_edit/form-auta.php?id=".$this->id."'>✏️ Upravit</a> | ";
     echo "<a href='../forms_remove/form-auta.php?id=".$this->id."'>🗑️ Smazat</a>";
 
     echo "</article>";
