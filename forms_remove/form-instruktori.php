@@ -4,7 +4,6 @@ require_once __DIR__ . "/../clases/Instruktori.php";
 
 $db = new InstruktoriDatabase();
 
-// id přijde nejdřív v GET (proklik z výpisu), po potvrzení formuláře pak v POST.
 $id = null;
 if (isset($_POST['id']) && filter_var($_POST['id'], FILTER_VALIDATE_INT) !== false) {
     $id = (int)$_POST['id'];
@@ -31,7 +30,6 @@ if (isset($_POST['id']) && filter_var($_POST['id'], FILTER_VALIDATE_INT) !== fal
         if ($instruktor === null) {
             echo "<p>Instruktor s ID " . htmlspecialchars((string)$id) . " nenalezen.</p>";
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['potvrdit'])) {
-            // Druhý krok — uživatel potvrdil tlačítkem, teprve teď probíhá DELETE.
             $smazany = $instruktor;
             if ($db->delete($id)) {
                 echo "<h2>Instruktor byl úspěšně smazán.</h2>";
@@ -40,7 +38,6 @@ if (isset($_POST['id']) && filter_var($_POST['id'], FILTER_VALIDATE_INT) !== fal
                 echo "<h2>Chyba při mazání instruktora.</h2>";
             }
         } else {
-            // První krok — zobrazí se náhled a formulář s tlačítkem k potvrzení.
             echo "<p>Opravdu chcete smazat tohoto instruktora?</p>";
             $instruktor->vypis();
             ?>

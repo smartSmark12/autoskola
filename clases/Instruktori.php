@@ -1,6 +1,5 @@
 <?php
 
-// Datová třída pro instruktora — mapuje sloupce tabulky `instruktori`.
 class Instruktori {
 
     private $id;
@@ -10,10 +9,7 @@ class Instruktori {
     private $email;
     private $aktivni;
 
-    // Naplní objekt z formulářových dat a zkontroluje formáty.
-    // Při neplatné hodnotě vrací false a další pole už nenastavuje.
     function nastavHodnoty($id = null, $jmeno = '', $prijmeni = '', $telefon = '', $email = '', $aktivni = true){
-        // id je null u nového záznamu, jinak musí být celé číslo
         if (!($id === null || filter_var($id, FILTER_VALIDATE_INT) !== false)) {
             return false;
         }
@@ -54,7 +50,6 @@ class Instruktori {
         return true;
     }
 
-    // Základní výpis bez odkazů — používá se po vložení a po smazání pro náhled.
     function vypis(){
         echo '<article class="display-card">';
         echo '<p><strong>ID:</strong> ' . htmlspecialchars((string)$this->id) . '</p>';
@@ -66,7 +61,6 @@ class Instruktori {
         echo '</article>';
     }
 
-    // Verze výpisu pro administrační seznam — přidává odkazy na editaci a smazání.
     function vypisSOdkazy(){
         echo '<article class="display-card">';
         echo '<p><strong>ID:</strong> ' . htmlspecialchars((string)$this->id) . '</p>';
@@ -82,7 +76,6 @@ class Instruktori {
         echo '</article>';
     }
 
-    // <option> pro select ve formuláři jízd: value je id, text je „Příjmení Jméno“.
     function vypisOptions(){
         echo '<option value="' . htmlspecialchars((string)$this->id) . '">'
            . htmlspecialchars($this->prijmeni . ' ' . $this->jmeno)

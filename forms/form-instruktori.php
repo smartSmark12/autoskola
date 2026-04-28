@@ -17,7 +17,6 @@
 
         $db = new InstruktoriDatabase();
 
-        // Zpracování odeslaného formuláře — nejdřív validace v modelu, pak insert.
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $instruktor = new Instruktori();
 

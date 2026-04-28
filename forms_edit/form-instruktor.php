@@ -13,7 +13,6 @@ if (isset($_POST['id']) && filter_var($_POST['id'], FILTER_VALIDATE_INT) !== fal
 }
 
 $message = '';
-// Načteme aktuální stav záznamu pro předvyplnění formuláře.
 $instruktor = ($id !== null) ? $db->getById($id) : null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $instruktor !== null) {
@@ -35,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $instruktor !== null) {
     } else {
         if ($db->update($upraveny)) {
             $message = '<h2>Data byla upravena</h2>';
-            // Po úspěchu si načteme znovu, aby formulář ukázal uložený stav.
             $instruktor = $db->getById($id);
         } else {
             $message = '<h2>Data nebyla upravena</h2>';

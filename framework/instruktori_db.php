@@ -1,7 +1,6 @@
 <?php
 include_once __DIR__ . "/database.php";
 
-// Přístupová vrstva k tabulce `instruktori`. Připojení dědí z Database.
 class InstruktoriDatabase extends Database {
     private $connection;
 
@@ -25,7 +24,6 @@ class InstruktoriDatabase extends Database {
         return false;
     }
 
-    // ORDER BY se nedá bindovat přes prepared statement, proto whitelist.
     public function getAll($orderBy = "prijmeni ASC") {
         $allowed = ["id", "jmeno", "prijmeni", "telefon", "email", "aktivni"];
 
@@ -47,7 +45,6 @@ class InstruktoriDatabase extends Database {
         return $sql->fetchAll();
     }
 
-    // Vrací objekt Instruktori, nebo null pokud záznam neexistuje.
     public function getById($id) {
         $query = "SELECT * FROM instruktori WHERE id = :id";
         $sql = $this->connection->prepare($query);

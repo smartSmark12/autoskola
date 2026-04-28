@@ -4,7 +4,6 @@ require_once __DIR__ . "/../clases/Instruktori.php";
 
 $db = new InstruktoriDatabase();
 
-// Hodnota z URL se ověří whitelistem v getAll(), takže není riziko injekce.
 $sort = $_GET['sort'] ?? 'prijmeni ASC';
 $instruktori = $db->getAll($sort);
 ?>
