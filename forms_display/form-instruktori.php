@@ -1,28 +1,38 @@
 <?php
-// Load database layer and model class
 require_once __DIR__ . "/../framework/instruktori_db.php";
 require_once __DIR__ . "/../clases/Instruktori.php";
 
-// Fetch all instructors sorted by surname
 $db = new InstruktoriDatabase();
-$instruktori = $db->getAll();
+
+$sort = $_GET['sort'] ?? 'prijmeni ASC';
+$instruktori = $db->getAll($sort);
 ?>
 <!DOCTYPE html>
-<html>
-<head><title>Výpis instruktorů</title></head>
-<link rel="stylesheet" href="../bordel/style.css">
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Výpis instruktorů</title>
+    <link rel="stylesheet" href="../bordel/style.css">
+</head>
 <body>
     <h1>Seznam instruktorů</h1>
+    <p>
+        Řadit podle:
+        <a href="?sort=prijmeni+ASC">Příjmení &uarr;</a> |
+        <a href="?sort=prijmeni+DESC">Příjmení &darr;</a> |
+        <a href="?sort=jmeno+ASC">Jméno &uarr;</a> |
+        <a href="?sort=id+ASC">ID &uarr;</a>
+    </p>
     <main class="flex-main">
         <div class="panel-vypis">
-            <!-- Loop through all instructors and display each one -->
             <?php foreach ($instruktori as $i): ?>
-                <article class="display-card"> <!-- style="border: 1px solid gray; margin: 10px; padding: 10px;" -->
-                    <?php $i->vypis(); ?>
-                    <a href="../forms_remove/form-instruktori.php?id=<?php echo $i->getId(); ?>">Smazat</a>
-                </article>
+                <?php $i->vypisSOdkazy(); ?>
             <?php endforeach; ?>
         </div>
     </main>
+    <p>
+        <a href="../forms/form-instruktori.php">Vložit nového instruktora</a> |
+        <a href="../index.php">Zpět na hlavní menu</a>
+    </p>
 </body>
 </html>
