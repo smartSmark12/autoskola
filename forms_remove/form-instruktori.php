@@ -1,18 +1,58 @@
 <?php
-require_once "../framework/instruktori_db.php";
+require_once __DIR__ . "/../framework/instruktori_db.php";
+require_once __DIR__ . "/../clases/Instruktori.php";
 
-// Validate ID from GET parameter and delete the instructor
-if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
-    $db = new InstruktoriDatabase();
-    $result = $db->delete((int)$_GET['id']);
+$db = new InstruktoriDatabase();
 
-    if ($result) {
-        echo "<p>Instruktor byl úspěšně smazán.</p>";
-    } else {
-        echo "<p>Chyba při mazání instruktora.</p>";
-    }
-} else {
-    echo "<p>Neplatné ID instruktora.</p>";
+// id přijde nejdřív v GET (proklik z výpisu), po potvrzení formuláře pak v POST.
+$id = null;
+if (isset($_POST['id']) && filter_var($_POST['id'], FILTER_VALIDATE_INT) !== false) {
+    $id = (int)$_POST['id'];
+} elseif (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT) !== false) {
+    $id = (int)$_GET['id'];
 }
 ?>
-<a href="../forms_display/form-instruktori.php">Zpět na seznam</a>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Smazání instruktora</title>
+    <link rel="stylesheet" href="../bordel/style.css">
+</head>
+<body>
+    <header><h1>Smazání instruktora</h1></header>
+    <main class="styled-panel-container">
+    <?php
+    if ($id === null) {
+        echo "<p>Neplatné ID instruktora.</p>";
+    } else {
+        $instruktor = $db->getById($id);
+
+        if ($instruktor === null) {
+            echo "<p>Instruktor s ID " . htmlspecialchars((string)$id) . " nenalezen.</p>";
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['potvrdit'])) {
+            // Druhý krok — uživatel potvrdil tlačítkem, teprve teď probíhá DELETE.
+            $smazany = $instruktor;
+            if ($db->delete($id)) {
+                echo "<h2>Instruktor byl úspěšně smazán.</h2>";
+                $smazany->vypis();
+            } else {
+                echo "<h2>Chyba při mazání instruktora.</h2>";
+            }
+        } else {
+            // První krok — zobrazí se náhled a formulář s tlačítkem k potvrzení.
+            echo "<p>Opravdu chcete smazat tohoto instruktora?</p>";
+            $instruktor->vypis();
+            ?>
+            <form method="post" class="styled-panel">
+                <input type="hidden" name="id" value="<?= htmlspecialchars((string)$id) ?>">
+                <button type="submit" name="potvrdit" value="1">Smazat instruktora</button>
+            </form>
+            <?php
+        }
+    }
+    ?>
+    <p><a href="../forms_display/form-instruktori.php">Zpět na seznam</a></p>
+    </main>
+</body>
+</html>

@@ -12,54 +12,50 @@
     </header>
     <main class="styled-panel-container">
         <?php
-        // Load database layer and model class
         require_once "../framework/instruktori_db.php";
         require_once "../clases/Instruktori.php";
 
         $db = new InstruktoriDatabase();
 
-        // Process form submission
-        if (isset($_POST["jmeno"])) {
+        // Zpracování odeslaného formuláře — nejdřív validace v modelu, pak insert.
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $instruktor = new Instruktori();
 
-            // Read POST data with fallback to empty string
-            $jmeno = isset($_POST['jmeno']) ? $_POST['jmeno'] : '';
-            $prijmeni = isset($_POST['prijmeni']) ? $_POST['prijmeni'] : '';
-            $telefon = isset($_POST['telefon']) ? $_POST['telefon'] : '';
-            $email = isset($_POST['email']) ? $_POST['email'] : '';
+            $jmeno    = $_POST['jmeno']    ?? '';
+            $prijmeni = $_POST['prijmeni'] ?? '';
+            $telefon  = $_POST['telefon']  ?? '';
+            $email    = $_POST['email']    ?? '';
 
-            try {
-                // Validate and set values, then insert into database
-                $instruktor->nastavHodnoty(null, $jmeno, $prijmeni, $telefon, $email, true);
+            if ($instruktor->nastavHodnoty(null, $jmeno, $prijmeni, $telefon, $email, true) === false) {
+                echo "<h2>Chyba: zadané hodnoty nejsou platné</h2>\n";
+            } else {
                 $instruktor_id = $db->insertInstruktor($instruktor);
 
-                if($instruktor_id !== false && $instruktor_id !== 0){
+                if ($instruktor_id !== false && $instruktor_id !== 0) {
                     echo "<h2>Data byla vložena</h2>\n";
+                    $vlozeny = $db->getById((int)$instruktor_id);
+                    if ($vlozeny) { $vlozeny->vypis(); }
                 } else {
                     echo "<h2>Data nebyla vložena</h2>\n";
                 }
-            } catch (Exception $e) {
-                echo '<h2>Chyba: ' . htmlspecialchars($e->getMessage()) . '</h2>';
             }
         }
         ?>
-        <!-- Instructor insert form with client-side validation -->
         <form method="post" onsubmit="return kontrola();" class="styled-panel">
             <label for="jmeno">Jméno</label>
-            <input type="text" name="jmeno" required>
+            <input type="text" name="jmeno" maxlength="50" required>
             <label for="prijmeni">Příjmení</label>
-            <input type="text" name="prijmeni" required>
+            <input type="text" name="prijmeni" maxlength="50" required>
             <label for="telefon">Telefon</label>
-            <input type="text" name="telefon">
+            <input type="text" name="telefon" maxlength="20" placeholder="+420 123 456 789">
             <label for="email">E-mail</label>
-            <input type="text" name="email">
+            <input type="text" name="email" maxlength="100">
             <button type="submit">Vložit instruktora</button>
         </form>
+        <p><a href="../forms_display/form-instruktori.php">Zpět na výpis</a></p>
     </main>
-</body>
 
 <script>
-    // Client-side validation: ensure name and surname are filled
     function kontrola() {
         var jmeno = document.querySelector('input[name="jmeno"]').value.trim();
         var prijmeni = document.querySelector('input[name="prijmeni"]').value.trim();
@@ -70,5 +66,5 @@
         return true;
     }
 </script>
-
+</body>
 </html>

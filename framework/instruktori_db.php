@@ -1,67 +1,81 @@
 <?php
 include_once __DIR__ . "/database.php";
 
-// Database access layer for the instruktori table
+// Přístupová vrstva k tabulce `instruktori`. Připojení dědí z Database.
 class InstruktoriDatabase extends Database {
     private $connection;
 
-    // Establish PDO connection on instantiation
     function __construct() {
         $this->connection = $this->connect();
     }
 
-    // Inserts a new instructor with auto-generated ID using transaction
     public function insertInstruktor($instruktor) {
         $query = "INSERT INTO instruktori (id, jmeno, prijmeni, telefon, email, aktivni)
-                  VALUES (:id, :jmeno, :prijmeni, :telefon, :email, :aktivni)";
-
+                  VALUES (NULL, :jmeno, :prijmeni, :telefon, :email, :aktivni)";
         $sql = $this->connection->prepare($query);
+        $sql->bindValue(":jmeno", $instruktor->getJmeno());
+        $sql->bindValue(":prijmeni", $instruktor->getPrijmeni());
+        $sql->bindValue(":telefon", $instruktor->getTelefon());
+        $sql->bindValue(":email", $instruktor->getEmail());
+        $sql->bindValue(":aktivni", $instruktor->getAktivni() ? 1 : 0, PDO::PARAM_INT);
 
-        // Extract values via getters from Instruktori object
-        $jmeno = $instruktor->getJmeno();
-        $prijmeni = $instruktor->getPrijmeni();
-        $telefon = $instruktor->getTelefon();
-        $email = $instruktor->getEmail();
-        $aktivni = $instruktor->getAktivni() ? 1 : 0;
-
-        try {
-            $this->connection->beginTransaction();
-
-            // Determine next ID as max(id) + 1
-            $res = $this->connection->query("SELECT COALESCE(MAX(id), 0) AS maxid FROM instruktori");
-            $row = $res->fetch(PDO::FETCH_ASSOC);
-            $nextId = (int)$row['maxid'] + 1;
-
-            // Bind all parameters with appropriate types
-            $sql->bindValue(":id", $nextId, PDO::PARAM_INT);
-            $sql->bindValue(":jmeno", $jmeno);
-            $sql->bindValue(":prijmeni", $prijmeni);
-            $sql->bindValue(":telefon", $telefon);
-            $sql->bindValue(":email", $email);
-            $sql->bindValue(":aktivni", $aktivni, PDO::PARAM_INT);
-
-            if ($sql->execute()) {
-                $this->connection->commit();
-                return $nextId;
-            }
-            $this->connection->rollBack();
-            return false;
-        } catch (Exception $e) {
-            if ($this->connection->inTransaction()) $this->connection->rollBack();
-            return false;
+        if ($sql->execute()) {
+            return $this->connection->lastInsertId();
         }
+        return false;
     }
 
-    // Fetches all instructors, returns array of Instruktori objects
+    // ORDER BY se nedá bindovat přes prepared statement, proto whitelist.
     public function getAll($orderBy = "prijmeni ASC") {
-        $query = "SELECT * FROM instruktori ORDER BY $orderBy";
+        $allowed = ["id", "jmeno", "prijmeni", "telefon", "email", "aktivni"];
+
+        $parts = explode(" ", $orderBy);
+        $column = $parts[0];
+        $direction = strtoupper($parts[1] ?? "ASC");
+
+        if (!in_array($column, $allowed, true)) {
+            $column = "prijmeni";
+        }
+        if (!in_array($direction, ["ASC", "DESC"], true)) {
+            $direction = "ASC";
+        }
+
+        $query = "SELECT * FROM instruktori ORDER BY $column $direction";
         $sql = $this->connection->prepare($query);
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Instruktori");
         return $sql->fetchAll();
     }
 
-    // Deletes an instructor by ID using prepared statement
+    // Vrací objekt Instruktori, nebo null pokud záznam neexistuje.
+    public function getById($id) {
+        $query = "SELECT * FROM instruktori WHERE id = :id";
+        $sql = $this->connection->prepare($query);
+        $sql->bindValue(":id", $id, PDO::PARAM_INT);
+        $sql->execute();
+        $sql->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Instruktori");
+        $result = $sql->fetch();
+        return $result === false ? null : $result;
+    }
+
+    public function update($instruktor) {
+        $query = "UPDATE instruktori
+                  SET jmeno = :jmeno,
+                      prijmeni = :prijmeni,
+                      telefon = :telefon,
+                      email = :email,
+                      aktivni = :aktivni
+                  WHERE id = :id";
+        $sql = $this->connection->prepare($query);
+        $sql->bindValue(":id", $instruktor->getId(), PDO::PARAM_INT);
+        $sql->bindValue(":jmeno", $instruktor->getJmeno());
+        $sql->bindValue(":prijmeni", $instruktor->getPrijmeni());
+        $sql->bindValue(":telefon", $instruktor->getTelefon());
+        $sql->bindValue(":email", $instruktor->getEmail());
+        $sql->bindValue(":aktivni", $instruktor->getAktivni() ? 1 : 0, PDO::PARAM_INT);
+        return $sql->execute();
+    }
+
     public function delete($id) {
         $query = "DELETE FROM instruktori WHERE id = :id";
         $sql = $this->connection->prepare($query);
