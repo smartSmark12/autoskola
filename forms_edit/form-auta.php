@@ -1,7 +1,7 @@
 <?php
 
 require_once "../framework/auta_db.php";
-require_once "../clases/Auta.php";
+require_once "../clases/auta.php";
 
 $db = new AutaDatabase();
 
