@@ -16,25 +16,25 @@ $jizdy = $db->getAll($sort);
 </head>
 <body>
     <h1>Administrace jízd</h1>
-    <p>
-        Řadit:
-        <a href="?sort=zacatek+DESC">Od nejnovějších</a> |
-        <a href="?sort=zacatek+ASC">Od nejstarších</a> |
-        <a href="?sort=student_prijmeni+ASC">Dle studenta</a> |
-        <a href="?sort=instruktor_prijmeni+ASC">Dle instruktora</a> |
-        <a href="?sort=znacka+ASC">Dle značky auta</a> |
-        <a href="?sort=stav+ASC">Dle stavu</a>
-    </p>
     <main class="flex-main">
+        <p>
+            Řadit:
+            <a href="?sort=zacatek+DESC">Od nejnovějších</a> |
+            <a href="?sort=zacatek+ASC">Od nejstarších</a> |
+            <a href="?sort=student_prijmeni+ASC">Dle studenta</a> |
+            <a href="?sort=instruktor_prijmeni+ASC">Dle instruktora</a> |
+            <a href="?sort=znacka+ASC">Dle značky auta</a> |
+            <a href="?sort=stav+ASC">Dle stavu</a>
+        </p>
         <div class="panel-vypis">
             <?php foreach ($jizdy as $j): ?>
                 <?php $j->vypisSOdkazy(); ?>
             <?php endforeach; ?>
         </div>
+        <p>
+            <a href="../forms/form-jizdy.php">Vložit novou jízdu</a> |
+            <a href="../index.php">Zpět na hlavní menu</a>
+        </p>
     </main>
-    <p>
-        <a href="../forms/form-jizdy.php">Vložit novou jízdu</a> |
-        <a href="../index.php">Zpět na hlavní menu</a>
-    </p>
 </body>
 </html>

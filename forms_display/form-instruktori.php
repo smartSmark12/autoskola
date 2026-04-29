@@ -16,23 +16,23 @@ $instruktori = $db->getAll($sort);
 </head>
 <body>
     <h1>Seznam instruktorů</h1>
-    <p>
-        Řadit podle:
-        <a href="?sort=prijmeni+ASC">Příjmení &uarr;</a> |
-        <a href="?sort=prijmeni+DESC">Příjmení &darr;</a> |
-        <a href="?sort=jmeno+ASC">Jméno &uarr;</a> |
-        <a href="?sort=id+ASC">ID &uarr;</a>
-    </p>
     <main class="flex-main">
+        <p>
+            Řadit podle:
+            <a href="?sort=prijmeni+ASC">Příjmení &uarr;</a> |
+            <a href="?sort=prijmeni+DESC">Příjmení &darr;</a> |
+            <a href="?sort=jmeno+ASC">Jméno &uarr;</a> |
+            <a href="?sort=id+ASC">ID &uarr;</a>
+        </p>
         <div class="panel-vypis">
             <?php foreach ($instruktori as $i): ?>
                 <?php $i->vypisSOdkazy(); ?>
             <?php endforeach; ?>
         </div>
+        <p>
+            <a href="../forms/form-instruktori.php">Vložit nového instruktora</a> |
+            <a href="../index.php">Zpět na hlavní menu</a>
+        </p>
     </main>
-    <p>
-        <a href="../forms/form-instruktori.php">Vložit nového instruktora</a> |
-        <a href="../index.php">Zpět na hlavní menu</a>
-    </p>
 </body>
 </html>
