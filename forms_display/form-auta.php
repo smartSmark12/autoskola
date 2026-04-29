@@ -11,34 +11,45 @@ $auta = $db->getAll($order);
 
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
-<meta charset="UTF-8">
-<title>Administrace aut</title>
-<link rel="stylesheet" href="../bordel/style.css">
+    <meta charset="UTF-8">
+    <title>Administrace aut</title>
+    <link rel="stylesheet" href="../bordel/style.css">
 </head>
 
 <body>
+    <header>
+        <h1>Administrace aut</h1>
+    </header>
+    <main class="flex-main">
+        <form action="" method="post" class="display-form">
+            <h3>Řazení</h3>
 
-<h1>Administrace aut</h1>
+            <a href="?order=znacka ASC">Značka A-Z</a> |
+            <a href="?order=znacka DESC">Značka Z-A</a> |
+            <a href="?order=model ASC">Model</a> |
+            <a href="?order=poznavaci_znacka ASC">SPZ</a> |
+            <a href="?order=id DESC">Nejnovější</a> |
+            <a href="?order=id ASC">Nejstarší</a>
+        </form>
+        <!-- <hr> -->
+        <div class="panel-vypis">
+            <?php
 
-<h3>Řazení</h3>
+            foreach ($auta as $auto) {
+                $auto->vypisAdmin();
+            }
 
-<a href="?order=znacka ASC">Značka A-Z</a> |
-<a href="?order=znacka DESC">Značka Z-A</a> |
-<a href="?order=model ASC">Model</a> |
-<a href="?order=poznavaci_znacka ASC">SPZ</a> |
-<a href="?order=id DESC">Nejnovější</a> |
-<a href="?order=id ASC">Nejstarší</a>
+            ?>
+        </div>
+    </main>
 
-<hr>
 
-<?php
 
-foreach ($auta as $auto) {
-    $auto->vypisAdmin();
-}
 
-?>
+
 
 </body>
+
 </html>

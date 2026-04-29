@@ -52,10 +52,18 @@ public function vypis() {
            '</option>';
 }
 public function vypisAdmin() {
-    echo "<article class='auto-karta'>";
+    echo "<article class='display-card'>";
+    echo "<h2>".htmlspecialchars($this->znacka)." ".htmlspecialchars($this->model)."</h2>";
+    echo "<p><strong>ID:</strong> ".$this->id."</p>";
+    echo "<p><strong>SPZ:</strong> ".htmlspecialchars($this->poznavaci_znacka)."</p>";
+    echo "<p><strong>Stav:</strong> ".($this->aktivni ? "Aktivní" : "Neaktivní")."</p>";
+    echo "<a href='../forms_edit/form-auta.php?id=".$this->id."'>✏️ Upravit</a>";
+    echo "<a href='../forms_remove/form-auta.php?id=".$this->id."'>🗑️ Smazat</a>";
+    echo "</article>";
+    /* echo "<article class='display-card'>";
     echo "<h2>" . htmlspecialchars($this->znacka) . "</h2>";
     echo "<h2>" . htmlspecialchars($this->model) . "</h2>";
-    echo "<ul>";
+    echo "<p>";
     echo "<li><strong>ID:</strong> " . $this->id . "</li>";
     echo "<li><strong>SPZ:</strong> " . htmlspecialchars($this->poznavaci_znacka) . "</li>";
     echo "<li><strong>Stav:</strong> " . ($this->aktivni ? "Aktivní" : "Neaktivní") . "</li>";
@@ -64,7 +72,16 @@ public function vypisAdmin() {
     echo "<a href='../forms_edit/form-auta.php?id=".$this->id."'>✏️ Upravit</a> | ";
     echo "<a href='../forms_remove/form-auta.php?id=".$this->id."'>🗑️ Smazat</a>";
 
-    echo "</article>";
+    echo "</article>"; */
 }
 }
 ?>
+
+    <!-- echo <article class="display-card">
+    echo <h2>htmlspecialchars($this->znacka) htmlspecialchars($this->model)</h2>
+    echo <p><strong>ID:</strong>$this->id</p>
+    echo <p><strong>SPZ:</strong>htmlspecialchars($this->poznavaci_znacka)</p>
+    echo <p><strong>Stav:</strong>($this->aktivni ? "Aktivní" : "Neaktivní")</p>
+    echo "<a href='../forms_edit/form-auta.php?id=".$this->id."'>✏️ Upravit</a> | ";
+    echo "<a href='../forms_remove/form-auta.php?id=".$this->id."'>🗑️ Smazat</a>";
+    echo </article> -->
