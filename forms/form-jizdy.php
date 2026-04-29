@@ -41,18 +41,24 @@ $auta        = $db->getAutaForSelect();
 ?>
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vložení jízdy</title>
     <link rel="stylesheet" href="../bordel/style.css">
 </head>
+
 <body>
-    <header><h1>Vložení jízdy</h1></header>
-    <main class="styled-panel-container">
+    <header>
+        <h1>Vložení jízdy</h1>
+    </header>
+    <main class="flex-main">
         <?php
         echo $message;
-        if ($vlozena) { $vlozena->vypis(); }
+        if ($vlozena) {
+            $vlozena->vypis();
+        }
         ?>
         <form method="post" class="styled-panel">
             <label for="id_studenta">Student</label>
@@ -90,11 +96,11 @@ $auta        = $db->getAutaForSelect();
 
             <label for="zacatek">Začátek</label>
             <input type="datetime-local" name="zacatek" id="zacatek"
-                   value="<?= htmlspecialchars($old['zacatek'] ?? '') ?>" required>
+                value="<?= htmlspecialchars($old['zacatek'] ?? '') ?>" required>
 
             <label for="konec">Konec</label>
             <input type="datetime-local" name="konec" id="konec"
-                   value="<?= htmlspecialchars($old['konec'] ?? '') ?>">
+                value="<?= htmlspecialchars($old['konec'] ?? '') ?>">
 
             <fieldset>
                 <legend>Stav</legend>
@@ -123,4 +129,5 @@ $auta        = $db->getAutaForSelect();
         </p>
     </main>
 </body>
+
 </html>

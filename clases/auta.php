@@ -57,8 +57,8 @@ public function vypisAdmin() {
     echo "<p><strong>ID:</strong> ".$this->id."</p>";
     echo "<p><strong>SPZ:</strong> ".htmlspecialchars($this->poznavaci_znacka)."</p>";
     echo "<p><strong>Stav:</strong> ".($this->aktivni ? "Aktivní" : "Neaktivní")."</p>";
-    echo "<a href='../forms_edit/form-auta.php?id=".$this->id."'>✏️ Upravit</a>";
-    echo "<a href='../forms_remove/form-auta.php?id=".$this->id."'>🗑️ Smazat</a>";
+    echo "<a href='../forms_edit/form-auta.php?id=".$this->id."'>Upravit</a>";
+    echo "<a href='../forms_remove/form-auta.php?id=".$this->id."'>Smazat</a>";
     echo "</article>";
     /* echo "<article class='display-card'>";
     echo "<h2>" . htmlspecialchars($this->znacka) . "</h2>";

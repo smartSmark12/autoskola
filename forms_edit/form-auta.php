@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             $zprava = "Chyba při ukládání.";
         }
-
     } catch (Exception $e) {
         $zprava = "Chyba: " . $e->getMessage();
     }
@@ -44,52 +43,54 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
-<meta charset="UTF-8">
-<title>Editace auta</title>
+    <meta charset="UTF-8">
+    <title>Editace auta</title>
 </head>
 
 <body>
 
-<h1>Editace auta</h1>
+    <h1>Editace auta</h1>
 
-<?php
-if ($zprava) {
-    echo "<p>$zprava</p>";
-}
-?>
+    <?php
+    if ($zprava) {
+        echo "<p>$zprava</p>";
+    }
+    ?>
 
-<form method="post">
+    <form method="post">
 
-<input type="hidden" name="id" value="<?php echo $auto->id; ?>">
+        <input type="hidden" name="id" value="<?php echo $auto->id; ?>">
 
-<label>Značka:</label>
-<input type="text" name="znacka" value="<?php echo htmlspecialchars($auto->znacka); ?>" required>
-<br><br>
+        <label>Značka:</label>
+        <input type="text" name="znacka" value="<?php echo htmlspecialchars($auto->znacka); ?>" required>
+        <br><br>
 
-<label>Model:</label>
-<input type="text" name="model" value="<?php echo htmlspecialchars($auto->model); ?>" required>
-<br><br>
+        <label>Model:</label>
+        <input type="text" name="model" value="<?php echo htmlspecialchars($auto->model); ?>" required>
+        <br><br>
 
-<label>SPZ:</label>
-<input type="text" name="poznavaci_znacka" value="<?php echo htmlspecialchars($auto->poznavaci_znacka); ?>" required>
-<br><br>
+        <label>SPZ:</label>
+        <input type="text" name="poznavaci_znacka" value="<?php echo htmlspecialchars($auto->poznavaci_znacka); ?>" required>
+        <br><br>
 
-<label>Stav:</label>
-<select name="aktivni">
-    <option value="1" <?php if ($auto->aktivni == 1) echo "selected"; ?>>Aktivní</option>
-    <option value="0" <?php if ($auto->aktivni == 0) echo "selected"; ?>>Neaktivní</option>
-</select>
+        <label>Stav:</label>
+        <select name="aktivni">
+            <option value="1" <?php if ($auto->aktivni == 1) echo "selected"; ?>>Aktivní</option>
+            <option value="0" <?php if ($auto->aktivni == 0) echo "selected"; ?>>Neaktivní</option>
+        </select>
 
-<br><br>
+        <br><br>
 
-<button type="submit">Uložit změny</button>
+        <button type="submit">Uložit změny</button>
 
-</form>
+    </form>
 
-<br>
+    <br>
 
-<a href="../forms_display/form-auta.php">Zpět na administraci</a>
+    <a href="../forms_display/form-auta.php">Zpět na administraci</a>
 
 </body>
+
 </html>
