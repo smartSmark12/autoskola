@@ -30,38 +30,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $instruktor !== null) {
     );
 
     if ($ok === false) {
-        $message = '<h2>Chyba: zadané hodnoty nejsou platné</h2>';
+        $message = "<div class='msg-err'>Chyba: zadané hodnoty nejsou platné</div>";
     } else {
         if ($db->update($upraveny)) {
-            $message = '<h2>Data byla upravena</h2>';
+            $message = "<div class='msg-ok'>Data byla upravena</div>";
             $instruktor = $db->getById($id);
         } else {
-            $message = '<h2>Data nebyla upravena</h2>';
+            $message = "<div class='msg-err'>Data nebyla upravena</div>";
         }
     }
 }
+
+$pageTitle   = 'Editace instruktora';
+$pageHeading = 'Editace instruktora';
+$pageActive  = 'vypis';
+$rel         = '../';
+include __DIR__ . '/../bordel/_layout_top.php';
 ?>
-<!DOCTYPE html>
-<html lang="cs">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Editace instruktora</title>
-    <link rel="stylesheet" href="../bordel/style.css">
-</head>
-
-<body>
-    <header>
-        <h1>Editace instruktora</h1>
-    </header>
-    <main class="flex-main">
         <?php
         echo $message;
 
         if ($id === null) {
-            echo "<p>Neplatné ID instruktora.</p>";
+            echo "<div class='msg-err'>Neplatné ID instruktora.</div>";
         } elseif ($instruktor === null) {
-            echo "<p>Instruktor s ID " . htmlspecialchars((string)$id) . " nenalezen.</p>";
+            echo "<div class='msg-err'>Instruktor s ID " . htmlspecialchars((string)$id) . " nenalezen.</div>";
         } else {
         ?>
             <form method="post" class="styled-panel">
@@ -91,8 +84,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $instruktor !== null) {
                 <button type="submit">Uložit změny</button>
             </form>
         <?php } ?>
-        <p><a href="../forms_display/form-instruktori.php">Zpět na seznam</a></p>
-    </main>
-</body>
-
-</html>
+        <p class="back-link"><a href="../forms_display/form-instruktori.php">&laquo; Zpět na seznam</a></p>
+<?php include __DIR__ . '/../bordel/_layout_bottom.php'; ?>

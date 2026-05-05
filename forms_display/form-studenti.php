@@ -1,56 +1,45 @@
-<!-- VK -->
- 
-<!DOCTYPE html>
-<html lang="cz">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studenti form</title>
-    <link rel="stylesheet" href="../bordel/style.css">
-</head>
-<body>
-    <header>
-        <h1>Studenti načtení</h1>
-    </header>
-    <main class="flex-main">
-        <form method="POST" class="display-form">
-            <label for="sort"><strong>Řazení:</strong></label>
-            <select name="sort" id="sort">
-                <option value="prijmeni">Příjmení</option>
-                <option value="jmeno">Jméno</option>
-                <option value="datum_narozeni">Datum narození</option>
-                <option value="datum_registrace">Datum registrace</option>
-            </select>
+<?php
+require_once __DIR__ . "/../framework/studenti_db.php";
+require_once __DIR__ . "/../clases/Studenti.php";
 
-            <button type="submit">Načíst</button>
-        </form>
+$db = new StudentiDatabase();
+$students = null;
 
-        <div class="panel-vypis">
-            <?php
+if (isset($_POST["sort"])) {
+    $students = $db->readStudents($_POST["sort"]);
+}
 
-            require_once "../framework/studenti_db.php";
-            require_once "../clases/Studenti.php";
+$pageTitle   = 'Výpis studentů';
+$pageHeading = 'Seznam studentů';
+$pageActive  = 'vypis';
+$rel         = '../';
+include __DIR__ . '/../bordel/_layout_top.php';
+?>
 
-            $db = new StudentiDatabase();
+<form method="POST" class="display-form">
+    <h3>Řazení:</h3>
+    <select name="sort" id="sort">
+        <option value="prijmeni">Příjmení</option>
+        <option value="jmeno">Jméno</option>
+        <option value="datum_narozeni">Datum narození</option>
+        <option value="datum_registrace">Datum registrace</option>
+    </select>
+    <button type="submit">Načíst</button>
+</form>
 
-            if (isset($_POST["sort"]))  {
+<div class="panel-vypis">
+    <?php if ($students !== null): ?>
+        <?php foreach ($students as $student) {
+            echo $student->vypisArticle();
+        } ?>
+    <?php else: ?>
+        <p class="empty-hint">Vyberte řazení a klikněte na <strong>Načíst</strong>.</p>
+    <?php endif; ?>
+</div>
 
-                $students = $db->readStudents($_POST["sort"]);
+<p class="back-link">
+    <a href="../forms/form-studenti.php">+ Vložit nového studenta</a>
+    <a href="../index.php">&laquo; Zpět na hlavní menu</a>
+</p>
 
-                foreach($students as $student){
-                    echo $student->vypisArticle();
-                }
-            }
-
-            ?>
-        </div>
-    </main>
-</body>
-
-<script>
-    function kontrola() {
-        ; /* very safe haha fixme */
-    }
-</script>
-
-</html>
+<?php include __DIR__ . '/../bordel/_layout_bottom.php'; ?>

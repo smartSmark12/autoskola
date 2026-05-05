@@ -1,20 +1,25 @@
-<!-- VK od RB -->
-
 <?php
-require_once "../framework/studenti_db.php";
+require_once __DIR__ . "/../framework/studenti_db.php";
 
-// Validate ID from GET parameter and delete the instructor
+$pageTitle   = 'Smazání studenta';
+$pageHeading = 'Smazání studenta';
+$pageActive  = 'odebrani';
+$rel         = '../';
+include __DIR__ . '/../bordel/_layout_top.php';
+
 if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
     $db = new StudentiDatabase();
     $result = $db->delete((int)$_GET['id']);
-
     if ($result) {
-        echo "<p>Student byl úspěšně smazán.</p>";
+        echo "<div class='msg-ok'>Student byl úspěšně smazán.</div>";
     } else {
-        echo "<p>Chyba při mazání studenta.</p>";
+        echo "<div class='msg-err'>Chyba při mazání studenta.</div>";
     }
 } else {
-    echo "<p>Neplatné ID studenta.</p>";
+    echo "<div class='msg-err'>Neplatné ID studenta.</div>";
 }
 ?>
-<a href="../forms_display/form-studenti.php">Zpět na seznam</a>
+
+<p class="back-link"><a href="../forms_display/form-studenti.php">&laquo; Zpět na seznam</a></p>
+
+<?php include __DIR__ . '/../bordel/_layout_bottom.php'; ?>

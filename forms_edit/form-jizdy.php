@@ -28,13 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $jizda !== null) {
     );
 
     if ($ok === false) {
-        $message = '<h2>Chyba: zadané hodnoty nejsou platné</h2>';
+        $message = "<div class='msg-err'>Chyba: zadané hodnoty nejsou platné</div>";
     } else {
         if ($db->update($upravena)) {
-            $message = '<h2>Data byla upravena</h2>';
+            $message = "<div class='msg-ok'>Data byla upravena</div>";
             $jizda = $db->getById($id);
         } else {
-            $message = '<h2>Data nebyla upravena</h2>';
+            $message = "<div class='msg-err'>Data nebyla upravena</div>";
         }
     }
 }
@@ -42,24 +42,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $jizda !== null) {
 $studenti    = $db->getStudentiForSelect();
 $instruktori = $db->getInstruktoriForSelect();
 $auta        = $db->getAutaForSelect();
+
+$pageTitle   = 'Editace jízdy';
+$pageHeading = 'Editace jízdy';
+$pageActive  = 'vypis';
+$rel         = '../';
+include __DIR__ . '/../bordel/_layout_top.php';
 ?>
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <title>Editace jízdy</title>
-    <link rel="stylesheet" href="../bordel/style.css">
-</head>
-<body>
-    <header><h1>Editace jízdy</h1></header>
-    <main class="styled-panel-container">
+
     <?php
     echo $message;
 
     if ($id === null) {
-        echo "<p>Neplatné ID jízdy.</p>";
+        echo "<div class='msg-err'>Neplatné ID jízdy.</div>";
     } elseif ($jizda === null) {
-        echo "<p>Jízda s ID " . htmlspecialchars((string)$id) . " nenalezena.</p>";
+        echo "<div class='msg-err'>Jízda s ID " . htmlspecialchars((string)$id) . " nenalezena.</div>";
     } else {
         // datetime z DB má formát "YYYY-MM-DD HH:MM:SS",
         // ale <input type="datetime-local"> chce "YYYY-MM-DDTHH:MM".
@@ -136,7 +133,5 @@ $auta        = $db->getAutaForSelect();
             <button type="submit">Uložit změny</button>
         </form>
     <?php } ?>
-    <p><a href="../forms_display/form-jizdy.php">Zpět na seznam</a></p>
-    </main>
-</body>
-</html>
+    <p class="back-link"><a href="../forms_display/form-jizdy.php">&laquo; Zpět na seznam</a></p>
+<?php include __DIR__ . '/../bordel/_layout_bottom.php'; ?>

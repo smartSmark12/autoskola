@@ -38,24 +38,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $studenti    = $db->getStudentiForSelect();
 $instruktori = $db->getInstruktoriForSelect();
 $auta        = $db->getAutaForSelect();
+
+$pageTitle   = 'Vložení jízdy';
+$pageHeading = 'Vložení jízdy';
+$pageActive  = 'vlozeni';
+$rel         = '../';
+include __DIR__ . '/../bordel/_layout_top.php';
 ?>
-<!DOCTYPE html>
-<html lang="cs">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vložení jízdy</title>
-    <link rel="stylesheet" href="../bordel/style.css">
-</head>
-
-<body>
-    <header>
-        <h1>Vložení jízdy</h1>
-    </header>
-    <main class="flex-main">
         <?php
-        echo $message;
+        if ($message !== '') {
+            $cls = (strpos($message, 'Chyba') !== false || strpos($message, 'nebyla') !== false) ? 'msg-err' : 'msg-ok';
+            echo "<div class='$cls'>" . strip_tags($message) . "</div>";
+        }
         if ($vlozena) {
             $vlozena->vypis();
         }
@@ -123,11 +117,8 @@ $auta        = $db->getAutaForSelect();
 
             <button type="submit">Vložit jízdu</button>
         </form>
-        <p>
-            <a href="../forms_display/form-jizdy.php">Zpět na výpis</a> |
+        <p class="back-link">
+            <a href="../forms_display/form-jizdy.php">&laquo; Zpět na výpis</a>
             <a href="../index.php">Hlavní menu</a>
         </p>
-    </main>
-</body>
-
-</html>
+<?php include __DIR__ . '/../bordel/_layout_bottom.php'; ?>
