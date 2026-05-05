@@ -1,3 +1,5 @@
+<!-- VK -->
+
 # Autoškola
 Autoskola prvni rady xd
 
@@ -120,3 +122,20 @@ Každý v týmu přidejte do své databázové třídy metodu pro smazání záz
 Vytvořte php stránku smazani-trida.php, na níž se přejde z administračního výpisu a která vypíše záznam s daným id a formulář s tlačítkem pro smazání. Po kliknutí na tlačítko se provede smazání záznamu.
 
 Společně vypracujte smazání jízdy.
+
+### editace
+Pokračujte v projektu Autoškola !!!!!!!!
+
+Každý v týmu přidejte do své databázové třídy metodu pro editaci záznamu určeného pomocí id.
+
+Vytvořte php stránku editace-trida.php, na níž se přejde z administračního výpisu a která načte záznam s daným id a hodnoty zapíše do formuláře pro editaci. 
+
+Vložení hodnot do formuláře:
+- input type text, number, date apod. - value
+- input type radio, checkbox - když hodnota==value, vloží se checked
+- option selectu- když hodnota==value, vloží se selected
+- textarea - obsah html
+
+Po kliknutí na tlačítko se provede uložení (update) záznamu.
+
+Společně vypracujte editaci jízd.

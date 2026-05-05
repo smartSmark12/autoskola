@@ -87,6 +87,31 @@ public function getById($id) {
     $sql->setFetchMode(PDO::FETCH_CLASS, "Auta");
     return $sql->fetch(); 
 }
+public function deleteById($id) {
+    $query = "DELETE FROM auta WHERE id = :id";
+    $sql = $this->connection->prepare($query);
+    $sql->bindValue(":id", $id, PDO::PARAM_INT);
+
+    return $sql->execute();
+}
+public function updateById($id, $auto) {
+    $query = "UPDATE auta 
+              SET znacka = :znacka,
+                  model = :model,
+                  poznavaci_znacka = :poznavaci_znacka,
+                  aktivni = :aktivni
+              WHERE id = :id";
+
+    $sql = $this->connection->prepare($query);
+
+    $sql->bindValue(":id", $id, PDO::PARAM_INT);
+    $sql->bindValue(":znacka", $auto->getZnacka());
+    $sql->bindValue(":model", $auto->getModel());
+    $sql->bindValue(":poznavaci_znacka", $auto->getPoznavaciZnacka());
+    $sql->bindValue(":aktivni", $auto->getAktivni(), PDO::PARAM_INT);
+
+    return $sql->execute();
+}
 }
 
 ?>

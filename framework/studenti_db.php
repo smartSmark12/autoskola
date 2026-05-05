@@ -36,6 +36,48 @@ class StudentiDatabase extends Database {
         if($sql->execute()){return $this->connection->lastInsertId();}
         else {return false;}
     }
+
+    public function readStudents($sortBy = "prijmeni") {
+
+        /* kontrola kvůli injection ✨✨😭 */
+        $allowed = ["id","jmeno","prijmeni","datum_narozeni","datum_registrace"];
+
+        if(!in_array($sortBy, $allowed)){
+            $sortBy = "prijmeni";
+        }
+
+        $query = "SELECT * FROM studenti ORDER BY $sortBy";
+
+        $sql = $this->connection->prepare($query);
+        $sql->execute();
+
+        $sql->setFetchMode(PDO::FETCH_CLASS, "Studenti");
+
+        return $sql->fetchAll();
+    }
+
+    public function readStudent($id) {
+
+        /* id kontrolalalallaaa 🎵 ig not- */
+        /* if ($id < 0) */
+
+        $query = "SELECT * FROM studenti WHERE id = :id";
+
+        $sql = $this->connection->prepare($query);
+        $sql->bindParam(":id", $id);
+        $sql->execute();
+
+        $sql->setFetchMode(PDO::FETCH_CLASS, "Student");
+
+        return $sql->fetch();
+    }
+
+    public function delete($id) {
+        $query = "DELETE FROM studenti WHERE id = :id";
+        $sql = $this->connection->prepare($query);
+        $sql->bindValue(":id", $id, PDO::PARAM_INT);
+        return $sql->execute();
+    }
 }
 
 ?>

@@ -1,0 +1,121 @@
+c03b0d72026-04-29CocoooooonutAdd: more security
+493d1f42026-04-29CocoooooonutFix
+27766072026-04-29smartSmark12Opravy vzhledu stránek
+bb44fcd2026-04-29smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+6f565672026-04-29smartSmark12Změna formátování výpisu aut
+664ecf82026-04-29Simon7895změna A na a
+c4494742026-04-29CocoooooonutFix: controls position
+30caf8e2026-04-29Simon7895Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+c3e224e2026-04-29Simon7895přídání editace pro auta
+624571b2026-04-28Cocoooooonutremoved useless comments
+c7d80ee2026-04-28CocoooooonutAdd complete jizdy module per README assignments- Jizdy model with regex-validated nastavHodnoty (datetime, FK, ENUM stav)
+- JizdyDatabase: insert, update, delete, getById, getAll with LEFT JOIN
+  on studenti/instruktori/auta and whitelisted ORDER BY
+- Insert form with student/instruktor/auto selects, datetime-local inputs,
+  status radios; renders inserted record on success
+- Admin listing with click-to-sort (date, student, instructor, car, status)
+- Two-step delete with record preview and POST confirmation
+- Edit page with prefilled selects (selected), datetime, and radios (checked)
+- Helper select queries kept in JizdyDatabase to avoid touching Studenti/Auta
+
+3f16cb82026-04-28CocoooooonutComplete instruktori module per README assignments- Add edit page + update() and getById() in DB layer
+- Two-step delete with record preview and POST confirmation
+- Whitelisted ORDER BY in getAll(); use AUTO_INCREMENT + lastInsertId()
+- nastavHodnoty() returns false on invalid input instead of throwing
+- vypis() renders <article>; new vypisSOdkazy() with edit/delete links
+- Drop deprecated FILTER_SANITIZE_STRING; escape on output via htmlspecialchars
+- Add inline comments
+
+c209f6f2026-04-15Simon7895přidání form na jízdy a oprava linku v autech
+60f0e8a2026-04-15Simon7895přídání složky a php souborů pro editaci
+0e300fd2026-03-11smartSmark12update readme o edit xd
+b6e08c62026-03-11smartSmark12student id add
+0f3db222026-03-11smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+418d4572026-03-11smartSmark12smazat styl hotfix
+3b053242026-03-11Simon7895Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+73c52872026-03-11Simon7895přidání barvy textu
+f9e2b382026-03-11smartSmark12studenti mazání hotfix
+3925caa2026-03-11smartSmark12hotfix stylů instruktori align
+51175d02026-03-11smartSmark12stylování hotfix
+26d27542026-03-11smartSmark12form auta hotfix
+fac5d012026-03-11smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+d2cfecd2026-03-11smartSmark12hotfix style
+7c183502026-03-11Simon7895oprava nazvu pro vypis
+076fe7a2026-03-11smartSmark12hotfix auta
+02926682026-03-11Cocoooooonutupdated admn
+45e6b5a2026-03-11Simon7895přidání výpisu admin a smazaní
+ef100a02026-03-10CocoooooonutMerge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+0916d012026-03-10smartSmark12možnosti řazení pro display forms
+ea2018f2026-03-10Cocoooooonut(·ω·) Trust me bro. I don't trust myself. The code is more unified with the other amateurs :) and the documentation made by AI.
+778bf032026-03-10smartSmark12načtení desing base + framework base
+5fb60792026-03-10smartSmark12desing update again
+bc2549a2026-03-10smartSmark12desing update
+391d8882026-03-10smartSmark12vařím nebo převařím? tune in later to find out!
+bf4f5752026-03-10smartSmark12base pro forms - OPRAVTE N2KDO PLS neumim css 😭
+c4381b72026-03-10smartSmark12base desinng ✨
+399ab262026-03-10smartSmark12struktura form podle zadání asi + index?
+609f0172026-03-04smartSmark12chcípákovina
+4980a902026-03-04smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+8ed575f2026-03-04smartSmark12readme type hinting
+d5b55852026-03-04Simon7895Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+51785972026-03-04Simon7895hotovo načtení z databáze
+fa754222026-03-04smartSmark12update readme, """fixed""" studenti
+f1ee2992026-03-04smartSmark12uhh uprava sql a ještě něco idkidc
+e7fc3ec2026-03-04Simon7895hotovo vložení do databáze
+ddfde0c2026-03-04smartSmark12už ma to nebaví
+c5b62112026-03-04smartSmark12lepší readme
+ad7f4732026-03-04smartSmark12update zadání v readme.md
+505d5362026-03-04smartSmark12čekám na sync lmao
+48369b22026-01-28Simon7895     odstraneni /
+68544652026-01-28Simon7895  zpet
+ecfffef2026-01-28Simon7895 necp
+61e30702026-01-13Radim BinovecAdd: form, db conn was added and some typos were removed. Complete main file rework bcs of better and safer connection
+22e57182026-01-07Simon7895Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+9756b822026-01-07Simon7895zpátky na první formulář
+88af7582026-01-07smartSmark12Studenti include -> require
+4de9afa2026-01-07smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+bf864972026-01-07smartSmark12Some changes idc it still dont work
+9bd1d1f2026-01-07Simon7895oprava require
+fdf5c382026-01-07Simon7895předělání formuláře
+4c876ed2026-01-07Simon7895auta_db vytvoření
+f19cd1f2026-01-07smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+180173f2026-01-07smartSmark12Database framework
+e478c6d2026-01-07Simon7895oprava require
+17bf4b22026-01-07Simon7895vytvoření celého formuláře
+01a006b2026-01-07Simon7895oprava chyb v auta
+76885a92026-01-07Simon7895formulář vytvoření
+afc5c7e2026-01-07smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+bdcd5bc2026-01-07smartSmark12Studenti vypisOptions + forms folder
+d6cab972026-01-07Simon7895Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+96c747b2026-01-07Simon7895oprava jedný malý věci
+d167d8e2025-12-10smartSmark12edit readme protože reslová neumí psát xd
+50005902025-12-10Radim BinovecMerge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+cc69ccc2025-12-10Radim BinovecAdd: vypisOptions function added
+0fcd42c2025-12-10smartSmark12edited readme for credit
+949477c2025-12-10smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+a0a56ff2025-12-10smartSmark12přidán výpis do studenti.php a opravena kontrola příjmení
+f1a06e12025-12-10Simon7895Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+78fcaca2025-12-10Simon7895opraveno
+172a9512025-12-10Radim BinovecMerge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+0f7482e2025-12-10Radim BinovecAdd: display instructor details
+b91070f2025-12-10Simon7895Merge branches 'prace' and 'prace' of https://github.com/smartSmark12/autoskola into prace
+1c647d22025-12-10Simon7895vypis a vypisOptions
+9c5940a2025-12-10smartSmark12Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+ce972b12025-12-10smartSmark12přidány prázdné funkce do studenti.php
+55ade442025-12-10Radim BinovecMerge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+621821c2025-12-10Radim BinovecAdd: completed validation
+0e243322025-12-10Simon7895Merge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+ae1b41c2025-12-10Simon7895databáze do php - typy
+ac8e59f2025-12-10Radim BinovecMerge branch 'prace' of https://github.com/smartSmark12/autoskola into prace
+ecab91d2025-12-10Radim BinovecAdd: data load and half of data validation
+ee579802025-12-10SmarkMerge pull request #1 from smartSmark12/mainRadim to hodil do mainu chcípák jeden
+965d3d22025-12-10SmarkMerge branch 'prace' into main
+5a7a7ba2025-12-10smartSmark12přidání kontrol a nastavení hodnot do studenti.php
+277249b2025-12-10Radim BinovecAdd: data load and half of data validation
+e115af62025-12-10smartSmark12úprava readme pro čitelnost a STUDENTI.PHP RAAAH
+3c773f02025-12-10smartSmark12přidáno zadání do reamde
+d6a02832025-12-10smartSmark12bordel
+a7207492025-12-10smartSmark12Přidáno instruktori a studenti hehe
+01fca8a2025-12-10Radim Binovecadded class auta.php
+9817ced2025-12-10Radim Binovecinitial file structure
+a3e72222025-12-10SmarkInitial commit
