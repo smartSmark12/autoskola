@@ -47,6 +47,7 @@ $totalCommits = count($commits);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autoškola - hlavní</title>
     <link rel="stylesheet" href="bordel/style.css?v=<?= @filemtime(__DIR__ . '/bordel/style.css') ?: time() ?>">
+    <link rel="shortcut icon" href="bordel/favicon.png" type="image/png">
 </head>
 <body>
     <div id="warning-overlay" class="warning-overlay" style="display:none;">
