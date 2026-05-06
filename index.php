@@ -56,7 +56,7 @@ $totalCommits = count($commits);
                 <div class="warning-icon">&#9888;</div>
                 <div class="warning-text">
                     Předchozí spojení z adresy <?= htmlspecialchars($client_ip) ?> nebylo korektně ukončeno odhlášením.<br>
-                    Hrozí porušení bezpečnosti Vašeho účtu nebo ztráta dat.
+                    Hrozí porušení bezpečnosti Vašeho účtu nebo ztráta dat. < br>
                 </div>
             </div>
             <div class="warning-footer">
@@ -336,17 +336,8 @@ $totalCommits = count($commits);
     <script>
         function dismissWarning() {
             document.getElementById('warning-overlay').style.display = 'none';
-            try { sessionStorage.setItem('autoskola_warned', '1'); } catch (e) {}
         }
-        (function showWarningIfNeeded() {
-            try {
-                if (!sessionStorage.getItem('autoskola_warned')) {
-                    document.getElementById('warning-overlay').style.display = 'flex';
-                }
-            } catch (e) {
-                document.getElementById('warning-overlay').style.display = 'flex';
-            }
-        })();
+        document.getElementById('warning-overlay').style.display = 'flex';
 
         function switchPane(target) {
             if (!target) return false;

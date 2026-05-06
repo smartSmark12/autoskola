@@ -1,3 +1,6 @@
+1e985772026-05-06CocoooooonutAdd: editace studenta (form, update metoda, getId getter)Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+8abcae72026-05-05CocoooooonutINTRANETIFICATION
 c03b0d72026-04-29CocoooooonutAdd: more security
 493d1f42026-04-29CocoooooonutFix
 27766072026-04-29smartSmark12Opravy vzhledu stránek
