@@ -57,19 +57,33 @@ class StudentiDatabase extends Database {
     }
 
     public function readStudent($id) {
-
-        /* id kontrolalalallaaa 🎵 ig not- */
-        /* if ($id < 0) */
-
         $query = "SELECT * FROM studenti WHERE id = :id";
-
         $sql = $this->connection->prepare($query);
-        $sql->bindParam(":id", $id);
+        $sql->bindValue(":id", $id, PDO::PARAM_INT);
         $sql->execute();
+        $sql->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Studenti");
+        $result = $sql->fetch();
+        return $result === false ? null : $result;
+    }
 
-        $sql->setFetchMode(PDO::FETCH_CLASS, "Student");
-
-        return $sql->fetch();
+    public function update($student) {
+        $query = "UPDATE studenti
+                  SET jmeno            = :jmeno,
+                      prijmeni         = :prijmeni,
+                      datum_narozeni   = :datum_narozeni,
+                      telefon          = :telefon,
+                      email            = :email,
+                      datum_registrace = :datum_registrace
+                  WHERE id = :id";
+        $sql = $this->connection->prepare($query);
+        $sql->bindValue(":id",               $student->getId());
+        $sql->bindValue(":jmeno",            $student->get_jmeno());
+        $sql->bindValue(":prijmeni",         $student->get_prijmeni());
+        $sql->bindValue(":datum_narozeni",   $student->get_datum_narozeni());
+        $sql->bindValue(":telefon",          $student->get_telefon());
+        $sql->bindValue(":email",            $student->get_email());
+        $sql->bindValue(":datum_registrace", $student->get_datum_registrace());
+        return $sql->execute();
     }
 
     public function delete($id) {
