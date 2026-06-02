@@ -1,4 +1,13 @@
 <?php
+require_once __DIR__ . "/framework/auth.php";
+Auth::start();
+
+Auth::requireLogin('');
+
+$jePrihlasen  = Auth::check();
+$jeInstruktor = Auth::jeInstruktor();
+$jeStudent    = Auth::jeStudent();
+
 $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'neznámé';
 
 function obnovCacheZGitu(string $repoDir, string $cachePath): bool {
@@ -12,7 +21,6 @@ function obnovCacheZGitu(string $repoDir, string $cachePath): bool {
 function nactiHistoriiVerzi(string $repoDir): array {
     $cachePath = $repoDir . '/bordel/git-history.txt';
 
-    // pokus o obnovení cache (pokud lze a cache je starší než 60s nebo neexistuje)
     $needsRefresh = !is_file($cachePath) || (time() - @filemtime($cachePath) > 60);
     if ($needsRefresh) {
         @obnovCacheZGitu($repoDir, $cachePath);
@@ -50,6 +58,7 @@ $totalCommits = count($commits);
     <link rel="shortcut icon" href="bordel/favicon.png" type="image/png">
 </head>
 <body>
+    <?php if ($jePrihlasen): ?>
     <div id="warning-overlay" class="warning-overlay" style="display:none;">
         <div class="warning-dialog">
             <div class="warning-header">Varování&hellip;</div>
@@ -57,7 +66,7 @@ $totalCommits = count($commits);
                 <div class="warning-icon">&#9888;</div>
                 <div class="warning-text">
                     Předchozí spojení z adresy <?= htmlspecialchars($client_ip) ?> nebylo korektně ukončeno odhlášením.<br>
-                    Hrozí porušení bezpečnosti Vašeho účtu nebo ztráta dat. < br>
+                    Hrozí porušení bezpečnosti Vašeho účtu nebo ztráta dat.
                 </div>
             </div>
             <div class="warning-footer">
@@ -65,12 +74,15 @@ $totalCommits = count($commits);
             </div>
         </div>
     </div>
+    <?php endif; ?>
 
     <header class="topbar">
         <div class="logo">auto<span>škola</span></div>
         <div class="user-info">
-            <span class="user-name">Autoškola první řady</span>
+            <span class="user-name"><?= htmlspecialchars(Auth::celeJmeno()) ?>
+                (<?= $jeInstruktor ? 'instruktor' : 'žák' ?>)</span>
             <a href="#" id="about-btn" class="logout" title="O aplikaci">&#x23FB;</a>
+            <a href="logout.php" class="logout" title="Odhlásit">Odhlásit</a>
         </div>
     </header>
 
@@ -97,22 +109,30 @@ $totalCommits = count($commits);
                 <span class="sidebar-icon">&#9432;</span>
                 <span>O aplikaci</span>
             </a>
-            <a href="#" class="sidebar-item" data-pane="vlozeni">
-                <span class="sidebar-icon">+</span>
-                <span>Vložení</span>
-            </a>
-            <a href="#" class="sidebar-item" data-pane="odebrani">
-                <span class="sidebar-icon">&minus;</span>
-                <span>Odebrání</span>
-            </a>
-            <a href="#" class="sidebar-item" data-pane="vypis">
-                <span class="sidebar-icon">&#9776;</span>
-                <span>Výpis</span>
-            </a>
-            <a href="#" class="sidebar-item" data-pane="administrativa">
-                <span class="sidebar-icon">&#9881;</span>
-                <span>Administrativa</span>
-            </a>
+            <?php if ($jeStudent): ?>
+                <a href="forms_display/form-jizdy.php" class="sidebar-item">
+                    <span class="sidebar-icon">&#9776;</span>
+                    <span>Moje jízdy</span>
+                </a>
+            <?php endif; ?>
+            <?php if ($jeInstruktor): ?>
+                <a href="#" class="sidebar-item" data-pane="vlozeni">
+                    <span class="sidebar-icon">+</span>
+                    <span>Vložení</span>
+                </a>
+                <a href="#" class="sidebar-item" data-pane="odebrani">
+                    <span class="sidebar-icon">&minus;</span>
+                    <span>Odebrání</span>
+                </a>
+                <a href="#" class="sidebar-item" data-pane="vypis">
+                    <span class="sidebar-icon">&#9776;</span>
+                    <span>Výpis</span>
+                </a>
+                <a href="#" class="sidebar-item" data-pane="administrativa">
+                    <span class="sidebar-icon">&#9881;</span>
+                    <span>Administrativa</span>
+                </a>
+            <?php endif; ?>
         </aside>
 
         <main class="content">
@@ -125,10 +145,17 @@ $totalCommits = count($commits);
                 </nav>
                 <div class="help-content"><img src="bordel/bro.jpg" alt="Nápověda"></div>
                 <div class="content-inner">
+                    <?php if ($jeStudent): ?>
                     <div class="info-box">
-                        Vítejte v informačním systému <strong>autoškola</strong>. Tato aplikace slouží pro správu studentů, instruktorů, vozidel a jízd autoškoly. V levém menu zvolte typ akce, kterou chcete provést. Některé části jsou stále ve vývoji a budou postupně doplňovány. Pokud zjistíte chybu, využijte záložku <strong>Hlášení chyby</strong>.<br><br>
+                        Vítejte, <strong><?= htmlspecialchars(Auth::celeJmeno()) ?></strong>. V sekci <strong>Moje jízdy</strong> najdete přehled svých naplánovaných jízd.<br><br>
+                        <a class="row-link" href="forms_display/form-jizdy.php">Zobrazit moje jízdy &rsaquo;</a>
+                    </div>
+                    <?php else: ?>
+                    <div class="info-box">
+                        Vítejte, <strong><?= htmlspecialchars(Auth::celeJmeno()) ?></strong>. Tato aplikace slouží pro správu studentů, instruktorů, vozidel a jízd autoškoly. V levém menu zvolte typ akce, kterou chcete provést.<br><br>
                         Dostupné moduly (levá svislá navigace) umožňují vkládat, odebírat a vypisovat záznamy v systému. V sekci <strong>Administrativa</strong> najdete souhrnné výpisy.
                     </div>
+                    <?php endif; ?>
 
                     <h2 class="version-title">Historie verzí</h2>
 
@@ -162,6 +189,7 @@ $totalCommits = count($commits);
                 </div>
             </section>
 
+            <?php if ($jeInstruktor): ?>
             <section class="pane hidden" id="pane-vlozeni">
                 <nav class="tabs">
                     <a href="#" class="tab active" data-tab="main">Vložení záznamů</a>
@@ -330,15 +358,20 @@ $totalCommits = count($commits);
                     <div class="table-footer">Modulů 1</div>
                 </div>
             </section>
+            <?php endif; ?>
 
         </main>
     </div>
 
     <script>
         function dismissWarning() {
-            document.getElementById('warning-overlay').style.display = 'none';
+            var wo = document.getElementById('warning-overlay');
+            if (wo) wo.style.display = 'none';
         }
-        document.getElementById('warning-overlay').style.display = 'flex';
+        (function () {
+            var wo = document.getElementById('warning-overlay');
+            if (wo) wo.style.display = 'flex';
+        })();
 
         function switchPane(target) {
             if (!target) return false;
@@ -372,7 +405,8 @@ $totalCommits = count($commits);
             switchPane(h || 'home');
         });
 
-        document.getElementById('about-btn').addEventListener('click', function (e) {
+        var aboutBtn = document.getElementById('about-btn');
+        if (aboutBtn) aboutBtn.addEventListener('click', function (e) {
             e.preventDefault();
             switchPane('home');
             document.getElementById('about-overlay').style.display = 'flex';

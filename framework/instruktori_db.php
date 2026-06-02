@@ -79,5 +79,30 @@ class InstruktoriDatabase extends Database {
         $sql->bindValue(":id", $id, PDO::PARAM_INT);
         return $sql->execute();
     }
+
+    // Vrátí asociativní pole (vč. sloupce heslo) podle emailu, nebo null. Pro login.
+    public function findByEmail($email) {
+        $query = "SELECT * FROM instruktori WHERE email = :email LIMIT 1";
+        $sql = $this->connection->prepare($query);
+        $sql->bindValue(":email", $email);
+        $sql->execute();
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
+        return $row === false ? null : $row;
+    }
+
+    // Registrace instruktora: vloží nový záznam s hashem hesla. Vrací nové ID nebo false.
+    public function registruj($jmeno, $prijmeni, $email, $hesloHash) {
+        $query = "INSERT INTO instruktori (id, jmeno, prijmeni, telefon, email, heslo, aktivni)
+                  VALUES (NULL, :jmeno, :prijmeni, NULL, :email, :heslo, 1)";
+        $sql = $this->connection->prepare($query);
+        $sql->bindValue(":jmeno", $jmeno);
+        $sql->bindValue(":prijmeni", $prijmeni);
+        $sql->bindValue(":email", $email);
+        $sql->bindValue(":heslo", $hesloHash);
+        if ($sql->execute()) {
+            return $this->connection->lastInsertId();
+        }
+        return false;
+    }
 }
 ?>

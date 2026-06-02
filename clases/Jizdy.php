@@ -107,7 +107,8 @@ class Jizdy {
     }
 
     // Verze pro administrační výpis — přidává odkazy na editaci a smazání.
-    function vypisSOdkazy() {
+    // $muzeUpravit: když false, odkazy se nevykreslí (cizí jízda instruktora).
+    function vypisSOdkazy($muzeUpravit = true) {
         echo '<article class="display-card">';
         echo '<p><strong>ID:</strong> ' . htmlspecialchars((string)$this->id) . '</p>';
         echo '<p><strong>Začátek:</strong> ' . htmlspecialchars((string)$this->zacatek) . '</p>';
@@ -125,10 +126,12 @@ class Jizdy {
             echo '<p><strong>Auto:</strong> '
                . htmlspecialchars($this->poznavaci_znacka . ' — ' . $this->znacka . ' ' . $this->model) . '</p>';
         }
-        echo '<p class="card-actions">';
-        echo '<a href="../forms_edit/form-jizdy.php?id=' . urlencode((string)$this->id) . '">Editovat</a> | ';
-        echo '<a href="../forms_remove/form-jizdy.php?id=' . urlencode((string)$this->id) . '">Smazat</a>';
-        echo '</p>';
+        if ($muzeUpravit) {
+            echo '<p class="card-actions">';
+            echo '<a href="../forms_edit/form-jizdy.php?id=' . urlencode((string)$this->id) . '">Editovat</a> | ';
+            echo '<a href="../forms_remove/form-jizdy.php?id=' . urlencode((string)$this->id) . '">Smazat</a>';
+            echo '</p>';
+        }
         echo '</article>';
     }
 

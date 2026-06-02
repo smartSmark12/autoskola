@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../framework/auth.php";
+Auth::requireInstruktor("../");
 require_once __DIR__ . "/../framework/jizdy_db.php";
 require_once __DIR__ . "/../clases/Jizdy.php";
 
@@ -25,6 +27,8 @@ if ($id === null) {
     $jizda = $db->getById($id);
     if ($jizda === null) {
         echo "<div class='msg-err'>Jízda s ID " . htmlspecialchars((string)$id) . " nenalezena.</div>";
+    } elseif ((int)$jizda->getIdInstruktora() !== (int)Auth::id()) {
+        echo "<div class='msg-err'>Tuto jízdu nemůžete smazat &mdash; nejste její instruktor.</div>";
     } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['potvrdit'])) {
         $smazana = $jizda;
         if ($db->delete($id)) {

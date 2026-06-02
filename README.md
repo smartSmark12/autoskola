@@ -1,7 +1,5 @@
-<!-- VK -->
-
 # Autoškola
-Autoskola prvni rady xd
+Autoškola první řady
 
 ## zadání
 ### PHP class

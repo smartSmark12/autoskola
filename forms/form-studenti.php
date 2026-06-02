@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../framework/auth.php";
+Auth::requireInstruktor("../");
 $pageTitle   = 'Vložení studenta';
 $pageHeading = 'Studenti vložení';
 $pageActive  = 'vlozeni';
@@ -19,12 +21,10 @@ if (isset($_POST["jmeno"])) {
 
     $student_id = $db->insertStudent($student);
 
-    /* if($student_id > 0){echo "<h2>Data byla vložena</h2>\n"; }
-    else {echo "<h2>Data nebyla vložena</h2>\n";} */
 }
 
 ?>
-<form method="post", onsubmit=kontrola class="styled-panel">
+<form method="post" class="styled-panel">
     <label for="jmeno">Jméno</label>
     <input type="text" name="jmeno" required>
     <label for="prijmeni">Příjmení</label>
@@ -39,11 +39,5 @@ if (isset($_POST["jmeno"])) {
     <input type="date" name="datum_registrace" required>
     <button type="submit">Vložit</button>
 </form>
-
-<script>
-    function kontrola() {
-        ; /* very safe haha fixme */
-    }
-</script>
 
 <?php include __DIR__ . '/../bordel/_layout_bottom.php'; ?>
