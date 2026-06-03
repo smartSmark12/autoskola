@@ -78,8 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <span class="brand-word"><em>auto</em>škola</span><span class="brand-num">4</span>
         </div>
         <div class="brand-meta">
-            <span>&copy; 2026 Autoškola</span>
-            <span class="brand-ver">evidence studentů a jízd</span>
+            <span>&copy; 2026&ndash;2026 1. řada</span>
+            <span class="brand-ver">1.0</span>
         </div>
     </div>
 </body>

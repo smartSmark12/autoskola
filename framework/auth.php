@@ -3,10 +3,10 @@ require_once __DIR__ . "/studenti_db.php";
 require_once __DIR__ . "/instruktori_db.php";
 
 // Centrální autentizace přes PHP session.
-// Role uživatele je dána tabulkou, ve které se najde email: 'student' | 'instruktor'.
+// tabulka, ve které se najde email: 'student' | 'instruktor'.
 class Auth {
 
-    // Spustí session s rozumným zabezpečením cookie. Volat na začátku každé stránky.
+    // Spustí session // na začátku každé stránky.
     public static function start() {
         if (session_status() === PHP_SESSION_ACTIVE) {
             return;
@@ -18,18 +18,18 @@ class Auth {
         session_start();
     }
 
-    // Pokusí se přihlásit dle emailu a hesla. Vrací true při úspěchu.
+    // Pokusí se přihlásit dle emailu a hesla
     public static function login($email, $heslo) {
         self::start();
 
-        // 1) zkus studenta
+        // zkus studenta?
         $student = (new StudentiDatabase())->findByEmail($email);
         if ($student && self::overHeslo($heslo, $student['heslo'])) {
             self::nastavSession((int)$student['id'], 'student', $student['jmeno'], $student['prijmeni']);
             return true;
         }
 
-        // 2) zkus instruktora
+        // zkus instruktora
         $instruktor = (new InstruktoriDatabase())->findByEmail($email);
         if ($instruktor && self::overHeslo($heslo, $instruktor['heslo'])) {
             self::nastavSession((int)$instruktor['id'], 'instruktor', $instruktor['jmeno'], $instruktor['prijmeni']);
@@ -51,7 +51,7 @@ class Auth {
             'jmeno'    => $jmeno,
             'prijmeni' => $prijmeni,
         ];
-        // zobraz varování o nebezpečném přihlášení – jen jednou, hned po přihlášení
+        // varování o nebezpečném přihlášení
         $_SESSION['zobraz_varovani'] = true;
     }
 

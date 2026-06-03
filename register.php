@@ -133,11 +133,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="auth-footer-brand">
         <div class="brand-logo">
-            <span class="brand-word"><em>intra</em>net</span><span class="brand-num">4</span>
+            <span class="brand-word"><em>auto</em>škola</span><span class="brand-num">4</span>
         </div>
         <div class="brand-meta">
-            <span>&copy; 2023&ndash;2026 McBlack</span>
-            <span class="brand-ver">4.4.4.303.20260105 | 6D517477</span>
+            <span>&copy; 2026&ndash;2026 1. řada</span>
+            <span class="brand-ver">1.0</span>
         </div>
     </div>
 </body>
