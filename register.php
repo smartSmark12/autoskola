@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($role === 'student' && $datumNar !== '' && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $datumNar)) {
         $chyba = 'Datum narození nemá platný formát.';
     } else {
-        // Email musí být unikátní napříč oběma tabulkami.
+        // email musí být unikátní napříč oběma tabulkami
         $existuje = (new StudentiDatabase())->findByEmail($email)
                  || (new InstruktoriDatabase())->findByEmail($email);
         if ($existuje) {
