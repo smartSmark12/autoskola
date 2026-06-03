@@ -51,6 +51,8 @@ class Auth {
             'jmeno'    => $jmeno,
             'prijmeni' => $prijmeni,
         ];
+        // zobraz varování o nebezpečném přihlášení – jen jednou, hned po přihlášení
+        $_SESSION['zobraz_varovani'] = true;
     }
 
     public static function logout() {

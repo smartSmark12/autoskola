@@ -33,13 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="bordel/style.css?v=<?= @filemtime(__DIR__ . '/bordel/style.css') ?: time() ?>">
 </head>
 <body class="auth-page">
-    <header class="topbar auth-topbar">
-        <div class="logo">auto<span>škola</span></div>
-        <div class="user-info">
-            <span class="user-name">Autoškola první řady</span>
-        </div>
-    </header>
-
     <div class="auth-infobar">
         <p>
             <strong class="hl-blue">Autoškola je webová aplikace pro správu výuky a jízd.</strong>

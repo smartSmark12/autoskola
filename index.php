@@ -5,6 +5,8 @@ Auth::start();
 Auth::requireLogin('');
 
 $jePrihlasen  = Auth::check();
+$zobrazVarovani = !empty($_SESSION['zobraz_varovani']);
+unset($_SESSION['zobraz_varovani']);
 $jeInstruktor = Auth::jeInstruktor();
 $jeStudent    = Auth::jeStudent();
 
@@ -58,7 +60,7 @@ $totalCommits = count($commits);
     <link rel="shortcut icon" href="bordel/favicon.png" type="image/png">
 </head>
 <body>
-    <?php if ($jePrihlasen): ?>
+    <?php if ($jePrihlasen && $zobrazVarovani): ?>
     <div id="warning-overlay" class="warning-overlay" style="display:none;">
         <div class="warning-dialog">
             <div class="warning-header">Varování&hellip;</div>
@@ -385,7 +387,7 @@ $totalCommits = count($commits);
             return true;
         }
 
-        document.querySelectorAll('.sidebar-item').forEach(function (item) {
+        document.querySelectorAll('.sidebar-item[data-pane]').forEach(function (item) {
             item.addEventListener('click', function (e) {
                 e.preventDefault();
                 var target = item.getAttribute('data-pane');

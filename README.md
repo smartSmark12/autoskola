@@ -137,3 +137,11 @@ Vložení hodnot do formuláře:
 Po kliknutí na tlačítko se provede uložení (update) záznamu.
 
 Společně vypracujte editaci jízd.
+
+### oprávnění
+Vytvořte přihlašování uživatelů (žáků i instruktorů).
+
+Doplňte do všech stránek ověření session tak, aby:
+nepřihlášený uživatel mohl prohlížet pouze úvodní statickou stránku s informacemi o autoškole a odkazem na přihlášení a registraci
+přihlášený žák mohl vidět jen svoje naplánované jízdy
+přihlášený instruktor mohl vidět všechny jízdy, řadit je a filtrovat výpis podle datumu, žáků, instruktorů či aut, a mohl editovat a zadávat jen svoje jízdy 
