@@ -855,3 +855,256 @@ article.display-card a[href*="remove"]:hover {
 .panel-vypis {
     width: 100%;
 }
+
+/* ===== Přihlašovací / registrační stránky ===== */
+.auth-page {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: #00536b;
+    font-family: "Segoe UI", "Tahoma", "Geneva", "Verdana", sans-serif;
+}
+
+.auth-topbar {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+}
+
+.auth-infobar {
+    border: 1px solid #f0a020;
+    margin: 20px 21px 0;
+    padding: 10px 11px;
+    font-size: 14px;
+    line-height: 1.42;
+    color: #222;
+    background-color: #ffffff;
+}
+
+.auth-infobar p {
+    margin: 0 0 8px;
+}
+
+.auth-infobar p:last-child {
+    margin-bottom: 0;
+}
+
+.auth-infobar .hl-blue { color: #1456b0; font-weight: 700; }
+.auth-infobar .hl-red  { color: #d11; font-weight: 700; }
+.auth-infobar a {
+    color: #1456b0;
+    text-decoration: underline;
+}
+
+/* Karta uprostřed stránky */
+.auth-center {
+    position: absolute;
+    top: 58.6%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 328px;
+    max-width: 92%;
+}
+
+.auth-box {
+    width: 100%;
+    background-color: #f7f7f7;
+    border: 1px solid #c7c7c7;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+
+.auth-box-wide { width: 100%; }
+
+.auth-box-header {
+    padding: 10px 14px;
+    color: #268bd2;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #f7f7f7;
+}
+
+.auth-box-body {
+    padding: 10px 13px 14px;
+    background-color: #f7f7f7;
+    border-top: 1px solid #ededed;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.auth-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-row > label {
+    width: 112px;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.auth-row > input {
+    flex: 1;
+    height: 25px;
+    padding: 3px 7px;
+    border: 1px solid #d3d3d3;
+    background-color: #fff;
+    font-size: 13px;
+    color: #333;
+}
+
+.auth-row > input::placeholder {
+    color: #b3b3b3;
+}
+
+.auth-row > input:focus {
+    outline: none;
+    border-color: #2f6fb5;
+}
+
+.auth-roles {
+    display: flex;
+    gap: 16px;
+}
+
+.auth-radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.auth-box-footer {
+    padding: 5px 5px 5px 14px;
+    background-color: #e9e9e9;
+    border-top: 1px solid #e2e2e2;
+    text-align: right;
+}
+
+.auth-box-footer > button {
+    min-width: 82px;
+    padding: 5px 15px;
+    background-color: #3a8fd0;
+    color: #ffffff;
+    border: 1px solid #2f7ab5;
+    border-radius: 3px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.auth-box-footer > button:hover {
+    background-color: #2f86cc;
+}
+
+.auth-box .msg-err {
+    margin-bottom: 2px;
+}
+
+.auth-register-hint {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.56);
+}
+
+.auth-register-hint a {
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.35);
+}
+
+.auth-register-hint a:hover {
+    color: #ffffff;
+    border-bottom-color: rgba(255,255,255,0.75);
+}
+
+/* Logo aplikace dole vpravo */
+.auth-footer-brand {
+    position: absolute;
+    right: 23px;
+    bottom: 19px;
+    text-align: right;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+}
+
+.brand-icon {
+    display: inline-flex;
+    line-height: 0;
+}
+
+.brand-word {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 56px;
+    font-weight: 700;
+    font-style: italic;
+    color: #000000;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.brand-word em {
+    font-style: italic;
+    color: #ffffff;
+}
+
+.brand-num {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 56px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--header-accent);
+    line-height: 1;
+    margin-left: 2px;
+}
+
+.brand-meta {
+    margin-top: 1px;
+    font-size: 11px;
+    color: #d0d7dc;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+    .auth-page {
+        overflow: auto;
+        padding-bottom: 118px;
+    }
+
+    .auth-topbar {
+        padding: 0 14px;
+    }
+
+    .auth-topbar .logo {
+        font-size: 34px;
+    }
+
+    .auth-topbar .user-info {
+        display: none;
+    }
+
+    .auth-center {
+        position: static;
+        transform: none;
+        margin: 28px auto 0;
+    }
+
+    .auth-footer-brand {
+        right: 14px;
+        bottom: 14px;
+    }
+
+    .brand-word,
+    .brand-num {
+        font-size: 42px;
+    }
+}

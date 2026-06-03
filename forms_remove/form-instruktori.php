@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../framework/auth.php";
+Auth::requireInstruktor("../");
 require_once __DIR__ . "/../framework/instruktori_db.php";
 require_once __DIR__ . "/../clases/Instruktori.php";
 

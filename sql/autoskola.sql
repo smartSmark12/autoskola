@@ -57,6 +57,7 @@ CREATE TABLE `instruktori` (
   `prijmeni` varchar(50) NOT NULL,
   `telefon` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `heslo` varchar(255) DEFAULT NULL,
   `aktivni` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
@@ -64,9 +65,9 @@ CREATE TABLE `instruktori` (
 -- Vypisuji data pro tabulku `instruktori`
 --
 
-INSERT INTO `instruktori` (`id`, `jmeno`, `prijmeni`, `telefon`, `email`, `aktivni`) VALUES
-(1, 'Pavel', 'Novák', '+420603999789', 'novak@autoskola.cz', 1),
-(2, 'Lucie', 'Výborná', '+420732333444', 'vyborna@autoskola.cz', 1);
+INSERT INTO `instruktori` (`id`, `jmeno`, `prijmeni`, `telefon`, `email`, `heslo`, `aktivni`) VALUES
+(1, 'Pavel', 'Novák', '+420603999789', 'novak@autoskola.cz', NULL, 1),
+(2, 'Lucie', 'Výborná', '+420732333444', 'vyborna@autoskola.cz', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -134,6 +135,7 @@ CREATE TABLE `studenti` (
   `datum_narozeni` date DEFAULT NULL,
   `telefon` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `heslo` varchar(255) DEFAULT NULL,
   `datum_registrace` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
@@ -141,9 +143,9 @@ CREATE TABLE `studenti` (
 -- Vypisuji data pro tabulku `studenti`
 --
 
-INSERT INTO `studenti` (`id`, `jmeno`, `prijmeni`, `datum_narozeni`, `telefon`, `email`, `datum_registrace`) VALUES
-(1, 'Jan', 'Horák', '2008-03-14', '+420622456789', 'horak@google.com', '2025-11-10'),
-(2, 'Petra', 'Veselá', '2006-11-21', '+420745869123', 'vesela@google.com', '2025-12-01');
+INSERT INTO `studenti` (`id`, `jmeno`, `prijmeni`, `datum_narozeni`, `telefon`, `email`, `heslo`, `datum_registrace`) VALUES
+(1, 'Jan', 'Horák', '2008-03-14', '+420622456789', 'horak@google.com', NULL, '2025-11-10'),
+(2, 'Petra', 'Veselá', '2006-11-21', '+420745869123', 'vesela@google.com', NULL, '2025-12-01');
 
 --
 -- Indexy pro exportované tabulky
@@ -160,7 +162,8 @@ ALTER TABLE `auta`
 -- Indexy pro tabulku `instruktori`
 --
 ALTER TABLE `instruktori`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uniq_instruktor_email` (`email`);
 
 --
 -- Indexy pro tabulku `jizdy`
@@ -181,7 +184,8 @@ ALTER TABLE `jizdy_view`
 -- Indexy pro tabulku `studenti`
 --
 ALTER TABLE `studenti`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uniq_student_email` (`email`);
 
 --
 -- AUTO_INCREMENT pro tabulky

@@ -50,7 +50,8 @@ class JizdyDatabase extends Database {
                 LEFT JOIN auta a        ON j.id_auta = a.id";
     }
 
-    public function getAll($orderBy = "zacatek DESC") {
+    // Přeloží "sloupec SMĚR" na bezpečné "ORDER BY" pomocí whitelistu.
+    private function orderByClause($orderBy) {
         $parts = explode(" ", $orderBy);
         $col = $parts[0];
         $dir = strtoupper($parts[1] ?? "DESC");
@@ -59,9 +60,52 @@ class JizdyDatabase extends Database {
         if (!in_array($dir, ["ASC", "DESC"], true)) {
             $dir = "DESC";
         }
+        return "$sortColumn $dir";
+    }
 
-        $query = $this->selectWithJoin() . " ORDER BY $sortColumn $dir";
+    // $filters: asociativní pole s volitelnými klíči
+    // id_studenta, id_instruktora, id_auta, datum_od, datum_do (YYYY-MM-DD).
+    public function getAll($orderBy = "zacatek DESC", $filters = []) {
+        $where  = [];
+        $params = [];
+
+        foreach (["id_studenta", "id_instruktora", "id_auta"] as $fk) {
+            if (!empty($filters[$fk]) && filter_var($filters[$fk], FILTER_VALIDATE_INT)) {
+                $where[] = "j.$fk = :$fk";
+                $params[":$fk"] = (int)$filters[$fk];
+            }
+        }
+        if (!empty($filters["datum_od"]) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $filters["datum_od"])) {
+            $where[] = "j.zacatek >= :datum_od";
+            $params[":datum_od"] = $filters["datum_od"] . " 00:00:00";
+        }
+        if (!empty($filters["datum_do"]) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $filters["datum_do"])) {
+            $where[] = "j.zacatek <= :datum_do";
+            $params[":datum_do"] = $filters["datum_do"] . " 23:59:59";
+        }
+
+        $query = $this->selectWithJoin();
+        if ($where) {
+            $query .= " WHERE " . implode(" AND ", $where);
+        }
+        $query .= " ORDER BY " . $this->orderByClause($orderBy);
+
         $sql = $this->connection->prepare($query);
+        foreach ($params as $k => $v) {
+            $sql->bindValue($k, $v, is_int($v) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
+        $sql->execute();
+        $sql->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Jizdy");
+        return $sql->fetchAll();
+    }
+
+    // Naplánované (stav 'p') jízdy konkrétního studenta. Pro výpis žákovi.
+    public function getForStudent($idStudenta, $orderBy = "zacatek ASC") {
+        $query = $this->selectWithJoin()
+               . " WHERE j.id_studenta = :id AND j.stav = 'p'"
+               . " ORDER BY " . $this->orderByClause($orderBy);
+        $sql = $this->connection->prepare($query);
+        $sql->bindValue(":id", (int)$idStudenta, PDO::PARAM_INT);
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Jizdy");
         return $sql->fetchAll();

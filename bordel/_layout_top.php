@@ -1,17 +1,30 @@
 <?php
+require_once __DIR__ . "/../framework/auth.php";
+Auth::start();
+
 $pageTitle  = $pageTitle  ?? 'Autoškola';
 $pageActive = $pageActive ?? '';
 $pageHeading = $pageHeading ?? $pageTitle;
 
 $rel = $rel ?? '../';
 
+$jePrihlasen  = Auth::check();
+$jeInstruktor = Auth::jeInstruktor();
+$jeStudent    = Auth::jeStudent();
+
+// Sidebar se skládá podle role uživatele.
 $sidebar = [
-    ['key' => 'home',           'href' => $rel . 'index.php',                 'icon' => '&#9432;', 'label' => 'O aplikaci'],
-    ['key' => 'vlozeni',        'href' => $rel . 'index.php#vlozeni',         'icon' => '+',       'label' => 'Vložení'],
-    ['key' => 'odebrani',       'href' => $rel . 'index.php#odebrani',        'icon' => '&minus;', 'label' => 'Odebrání'],
-    ['key' => 'vypis',          'href' => $rel . 'index.php#vypis',           'icon' => '&#9776;', 'label' => 'Výpis'],
-    ['key' => 'administrativa', 'href' => $rel . 'index.php#administrativa', 'icon' => '&#9881;', 'label' => 'Administrativa'],
+    ['key' => 'home', 'href' => $rel . 'index.php', 'icon' => '&#9432;', 'label' => 'O aplikaci'],
 ];
+if ($jeStudent) {
+    $sidebar[] = ['key' => 'vypis', 'href' => $rel . 'forms_display/form-jizdy.php', 'icon' => '&#9776;', 'label' => 'Moje jízdy'];
+}
+if ($jeInstruktor) {
+    $sidebar[] = ['key' => 'vlozeni',        'href' => $rel . 'index.php#vlozeni',        'icon' => '+',       'label' => 'Vložení'];
+    $sidebar[] = ['key' => 'odebrani',       'href' => $rel . 'index.php#odebrani',       'icon' => '&minus;', 'label' => 'Odebrání'];
+    $sidebar[] = ['key' => 'vypis',          'href' => $rel . 'index.php#vypis',          'icon' => '&#9776;', 'label' => 'Výpis'];
+    $sidebar[] = ['key' => 'administrativa', 'href' => $rel . 'index.php#administrativa', 'icon' => '&#9881;', 'label' => 'Administrativa'];
+}
 
 $tabs = $tabs ?? [['label' => $pageHeading, 'active' => true]];
 ?>
@@ -27,8 +40,15 @@ $tabs = $tabs ?? [['label' => $pageHeading, 'active' => true]];
     <header class="topbar">
         <div class="logo">auto<span>škola</span></div>
         <div class="user-info">
-            <span class="user-name">Autoškola první řady</span>
-            <a href="<?= $rel ?>index.php" class="logout" title="Domů">&#x23FB;</a>
+            <?php if ($jePrihlasen): ?>
+                <span class="user-name"><?= htmlspecialchars(Auth::celeJmeno()) ?>
+                    (<?= $jeInstruktor ? 'instruktor' : 'žák' ?>)</span>
+                <a href="<?= $rel ?>index.php" class="logout" title="Domů">&#x23FB;</a>
+                <a href="<?= $rel ?>logout.php" class="logout" title="Odhlásit">Odhlásit</a>
+            <?php else: ?>
+                <span class="user-name">Autoškola první řady</span>
+                <a href="<?= $rel ?>login.php" class="logout" title="Přihlásit">Přihlásit</a>
+            <?php endif; ?>
         </div>
     </header>
 

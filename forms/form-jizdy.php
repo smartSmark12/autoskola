@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../framework/auth.php";
+Auth::requireInstruktor("../");
 require_once __DIR__ . "/../framework/jizdy_db.php";
 require_once __DIR__ . "/../clases/Jizdy.php";
 
@@ -13,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ok = $jizda->nastavHodnoty(
         null,
         $_POST['id_studenta']    ?? '',
-        $_POST['id_instruktora'] ?? '',
+        Auth::id(),                       // instruktor smí zadávat jen své jízdy
         $_POST['id_auta']        ?? '',
         $_POST['zacatek']        ?? '',
         $_POST['konec']          ?? '',
@@ -67,15 +69,8 @@ include __DIR__ . '/../bordel/_layout_top.php';
             </select>
 
             <label for="id_instruktora">Instruktor</label>
-            <select name="id_instruktora" id="id_instruktora" required>
-                <option value="">&nbsp;</option>
-                <?php foreach ($instruktori as $i): ?>
-                    <option value="<?= htmlspecialchars((string)$i['id']) ?>"
-                        <?= (isset($old['id_instruktora']) && (string)$old['id_instruktora'] === (string)$i['id']) ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($i['prijmeni'] . ' ' . $i['jmeno']) ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+            <input type="text" id="id_instruktora" value="<?= htmlspecialchars(Auth::celeJmeno()) ?>" disabled>
+            <small>Jízda bude přiřazena vám jako instruktorovi.</small>
 
             <label for="id_auta">Auto</label>
             <select name="id_auta" id="id_auta" required>

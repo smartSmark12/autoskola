@@ -1,5 +1,3 @@
-<!-- VK -->
-
 <?php
 
 class Studenti {
@@ -11,11 +9,11 @@ class Studenti {
     private $email;
     private $datum_registrace;
 
-    function nastavHodnoty($jmeno, $prijmeni, $datum_narozeni, $telefon, $email, $datum_registrace) {
+    function nastavHodnoty($jmeno, $prijmeni, $datum_narozeni, $telefon, $email, $datum_registrace, $id = null) {
 
-        /* checkni hodnoty */ /* přidat ještě regex kontroly */
-        /* if (gettype($id) != "integer" or is_null($id)) {
-            return false; */
+        if ($id !== null && filter_var($id, FILTER_VALIDATE_INT) === false) {
+            return false;
+        }
         if (gettype($jmeno) != "string" or is_null($jmeno)) {
             return false;
         } else if (gettype($prijmeni) != "string" or is_null($prijmeni)) {
@@ -30,8 +28,7 @@ class Studenti {
             return false;
         }
 
-        /* nastav, pokud projdou všechny kontroly */
-        //$this->$id = $id;
+        $this->id = ($id === null) ? null : (int)$id;
         $this->jmeno = $jmeno;
         $this->prijmeni = $prijmeni;
         $this->datum_narozeni = $datum_narozeni;
@@ -41,8 +38,6 @@ class Studenti {
     }
 
     function vypis() {
-        /* vypíše echem data do article */
-        //echo "<h3>ID: ".$this->$id;
         echo "<p>Jméno: ".$this->jmeno."</p>";
         echo "<p>Příjmení: ".$this->prijmeni."</p>";
         echo "<p>Datum narození: ".$this->datum_narozeni."</p>";
@@ -52,7 +47,6 @@ class Studenti {
     }
 
     public function vypisArticle() {
-        /* na použití pro actually useful formát */
         echo "
         <article class='display-card'>
             <h2>".$this->jmeno." ".$this->prijmeni."</h2>
@@ -67,7 +61,10 @@ class Studenti {
         ";
     }
 
-    /* toto bolí */
+    public function getId() {
+        return $this->id;
+    }
+
     public function get_jmeno() {
         return $this->jmeno;
     }
@@ -91,10 +88,6 @@ class Studenti {
     public function get_datum_registrace() {
         return $this->datum_registrace;
     }
-
-    /* function vypisOptions() {
-        echo "<options value='{$this->id}'>{$this->jmeno} {$this->prijmeni}</options>"; // ukradeno od simona xd
-    } */
 }
 
 ?>

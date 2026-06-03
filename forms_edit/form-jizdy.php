@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../framework/auth.php";
+Auth::requireInstruktor("../");
 require_once __DIR__ . "/../framework/jizdy_db.php";
 require_once __DIR__ . "/../clases/Jizdy.php";
 
@@ -15,12 +17,15 @@ if (isset($_POST['id']) && filter_var($_POST['id'], FILTER_VALIDATE_INT) !== fal
 $message = '';
 $jizda = ($id !== null) ? $db->getById($id) : null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $jizda !== null) {
+// Instruktor smí editovat jen své jízdy.
+$jeVlastnik = ($jizda !== null && (int)$jizda->getIdInstruktora() === (int)Auth::id());
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $jizda !== null && $jeVlastnik) {
     $upravena = new Jizdy();
     $ok = $upravena->nastavHodnoty(
         $id,
         $_POST['id_studenta']    ?? '',
-        $_POST['id_instruktora'] ?? '',
+        Auth::id(),                       // instruktor zůstává vlastníkem jízdy
         $_POST['id_auta']        ?? '',
         $_POST['zacatek']        ?? '',
         $_POST['konec']          ?? '',
@@ -57,6 +62,8 @@ include __DIR__ . '/../bordel/_layout_top.php';
         echo "<div class='msg-err'>Neplatné ID jízdy.</div>";
     } elseif ($jizda === null) {
         echo "<div class='msg-err'>Jízda s ID " . htmlspecialchars((string)$id) . " nenalezena.</div>";
+    } elseif (!$jeVlastnik) {
+        echo "<div class='msg-err'>Tuto jízdu nemůžete editovat &mdash; nejste její instruktor.</div>";
     } else {
         // datetime z DB má formát "YYYY-MM-DD HH:MM:SS",
         // ale <input type="datetime-local"> chce "YYYY-MM-DDTHH:MM".
@@ -82,15 +89,7 @@ include __DIR__ . '/../bordel/_layout_top.php';
             </select>
 
             <label for="id_instruktora">Instruktor</label>
-            <select name="id_instruktora" id="id_instruktora" required>
-                <option value="">&nbsp;</option>
-                <?php foreach ($instruktori as $i): ?>
-                    <option value="<?= htmlspecialchars((string)$i['id']) ?>"
-                        <?= ((int)$i['id'] === (int)$jizda->getIdInstruktora()) ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($i['prijmeni'] . ' ' . $i['jmeno']) ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+            <input type="text" id="id_instruktora" value="<?= htmlspecialchars(Auth::celeJmeno()) ?>" disabled>
 
             <label for="id_auta">Auto</label>
             <select name="id_auta" id="id_auta" required>

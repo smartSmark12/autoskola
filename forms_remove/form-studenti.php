@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../framework/auth.php";
+Auth::requireInstruktor("../");
 require_once __DIR__ . "/../framework/studenti_db.php";
 
 $pageTitle   = 'Smazání studenta';

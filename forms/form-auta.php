@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../framework/auth.php";
+Auth::requireInstruktor("../");
 $pageTitle   = 'Vložení auta';
 $pageHeading = 'Přidání auta';
 $pageActive  = 'vlozeni';
