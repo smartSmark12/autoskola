@@ -1057,12 +1057,13 @@ article.display-card a[href*="remove"]:hover {
 
 .brand-num {
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 56px;
+    font-size: 30px;
     font-weight: 700;
     font-style: italic;
     color: var(--header-accent);
     line-height: 1;
     margin-left: 2px;
+    align-self: flex-start;
 }
 
 .brand-meta {
@@ -1103,8 +1104,11 @@ article.display-card a[href*="remove"]:hover {
         bottom: 14px;
     }
 
-    .brand-word,
-    .brand-num {
+    .brand-word {
         font-size: 42px;
+    }
+
+    .brand-num {
+        font-size: 23px;
     }
 }

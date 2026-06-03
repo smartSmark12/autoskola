@@ -17,6 +17,14 @@
 /*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
 
 --
+-- Current Database: `autoskola`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `autoskola` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_czech_ci */;
+
+USE `autoskola`;
+
+--
 -- Table structure for table `auta`
 --
 
@@ -68,7 +76,7 @@ CREATE TABLE `instruktori` (
   `aktivni` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_instruktor_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,8 +87,9 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `instruktori` WRITE;
 /*!40000 ALTER TABLE `instruktori` DISABLE KEYS */;
 INSERT INTO `instruktori` VALUES
-(1,'Pavel','Novák','+420603999789','novak@autoskola.cz',NULL,1),
-(2,'Lucie','Výborná','+420732333444','vyborna@autoskola.cz',NULL,1);
+(1,'Pavel','Novák','+420603999789','novak@autoskola.cz','$2y$12$Y8ugakrEES5dvBGYdpkbaO7uc8ZYwCEXR39CJ6tMsZV3WjVqi8ERW',1),
+(2,'Lucie','Výborná','+420732333444','vyborna@autoskola.cz','$2y$12$Y8ugakrEES5dvBGYdpkbaO7uc8ZYwCEXR39CJ6tMsZV3WjVqi8ERW',1),
+(4,'huh','huh',NULL,'huh@huh.huh','$2y$12$MQ7otNQgV8i4WGmbgXzYOO3tfy1rR4LFo7sr4L1oNZYmIbxK2bLj2',1);
 /*!40000 ALTER TABLE `instruktori` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -105,7 +114,7 @@ CREATE TABLE `jizdy` (
   KEY `id_studenta` (`id_studenta`),
   KEY `id_instruktora` (`id_instruktora`),
   KEY `id_auta` (`id_auta`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +128,8 @@ INSERT INTO `jizdy` VALUES
 (101,1,1,1,'2026-02-05 14:00:00','2026-02-05 15:00:00','p'),
 (102,1,1,1,'2026-02-10 13:00:00','2026-02-10 14:30:00','p'),
 (103,2,2,4,'2026-02-05 14:00:00','2026-02-05 15:00:00','p'),
-(104,2,2,2,'2026-02-14 09:00:00','2026-02-14 10:00:00','p');
+(104,2,2,2,'2026-02-14 09:00:00','2026-02-14 10:00:00','p'),
+(106,5,4,4,'2026-06-04 06:41:00','2026-06-06 06:41:00','p');
 /*!40000 ALTER TABLE `jizdy` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -184,7 +194,7 @@ CREATE TABLE `studenti` (
   `datum_registrace` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_student_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,9 +205,10 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `studenti` WRITE;
 /*!40000 ALTER TABLE `studenti` DISABLE KEYS */;
 INSERT INTO `studenti` VALUES
-(1,'Lednička','Horák','2008-03-14','+420622456789','horak@google.com',NULL,'2025-11-10'),
-(2,'Petra','Veselá','2006-11-21','+420745869123','vesela@google.com',NULL,'2025-12-01'),
-(3,'Šimon','Hlavnička','1998-10-04','+420123123123','simonhlavnicka@gmail.com',NULL,'2026-05-06');
+(1,'Lednička','Horák','2008-03-14','+420622456789','horak@google.com','$2y$12$Y8ugakrEES5dvBGYdpkbaO7uc8ZYwCEXR39CJ6tMsZV3WjVqi8ERW','2025-11-10'),
+(2,'Petra','Veselá','2006-11-21','+420745869123','vesela@google.com','$2y$12$Y8ugakrEES5dvBGYdpkbaO7uc8ZYwCEXR39CJ6tMsZV3WjVqi8ERW','2025-12-01'),
+(3,'Šimon','Hlavnička','1998-10-04','+420123123123','simonhlavnicka@gmail.com','$2y$12$Y8ugakrEES5dvBGYdpkbaO7uc8ZYwCEXR39CJ6tMsZV3WjVqi8ERW','2026-05-06'),
+(5,'Václav','Kuuuuuuuuuuufurst','2026-06-17',NULL,'idk@idk.idk','$2y$12$72eMSQj/18GZJuxe.JAVIuH5U3b2QVC5S7AgNRD.Q0s3q/BevGH1C','2026-06-02');
 /*!40000 ALTER TABLE `studenti` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -212,4 +223,4 @@ SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-05-06  9:29:49
+-- Dump completed on 2026-06-03  8:16:46

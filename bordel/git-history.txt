@@ -1,4 +1,10 @@
-d52b2352026-06-02CocoooooonutAdd login, registration, and role-based access
+99266d82026-06-03smartSmark12microfix footeru
+e5df1932026-06-03CocoooooonutShow login warning only once after login- Display warning overlay just once per login via session flag
+- Restrict sidebar tab handler to items with data-pane
+- Remove redundant header from login page
+
+23efaa92026-06-02CocoooooonutAdd login, registration, and role-based access
+57bf37b2026-05-06smartSmark12Added a favicon
 0116e1b2026-05-06CocoooooonutUpdated gitlog and fixed pop up showing
 1e985772026-05-06CocoooooonutAdd: editace studenta (form, update metoda, getId getter)Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 
